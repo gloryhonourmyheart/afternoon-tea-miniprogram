@@ -2,6 +2,7 @@
   "pages": [
     "pages/index/index",
     "pages/activity/detail",
+    "pages/community/community",
     "pages/profile/profile"
   ],
   "window": {
@@ -20,6 +21,12 @@
       {
         "pagePath": "pages/index/index",
         "text": "发现",
+        "iconPath": "images/discover.png",
+        "selectedIconPath": "images/discover-active.png"
+      },
+      {
+        "pagePath": "pages/community/community",
+        "text": "社区",
         "iconPath": "images/discover.png",
         "selectedIconPath": "images/discover-active.png"
       },
