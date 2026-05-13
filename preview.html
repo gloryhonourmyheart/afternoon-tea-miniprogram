@@ -2,39 +2,89 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>美丽下午茶时光 - 预览版</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background-color: #FFF0F5;
+            background-color: #E8E8E8;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
             min-height: 100vh;
         }
         .browser-nav {
-            text-align: center;
-            margin-bottom: 15px;
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            background: rgba(255,255,255,0.95);
+            padding: 10px 20px;
+            border-radius: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            gap: 10px;
         }
         .browser-nav button {
             background: #FF9BB3;
             color: white;
             border: none;
-            padding: 8px 16px;
+            padding: 8px 20px;
             border-radius: 20px;
-            margin: 0 5px;
             cursor: pointer;
             font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
         }
         .browser-nav button.active {
             background: #FF6B8A;
+            transform: scale(1.05);
+        }
+        .browser-nav button:hover {
+            opacity: 0.9;
+        }
+        .phone-container {
+            margin-top: 60px;
         }
         .phone-frame {
             width: 375px;
-            margin: 0 auto;
             background: #1a1a1a;
-            border-radius: 40px;
-            padding: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            border-radius: 45px;
+            padding: 22px;
+            box-shadow: 
+                0 20px 60px rgba(0,0,0,0.3),
+                inset 0 2px 4px rgba(255,255,255,0.1);
+            position: relative;
+        }
+        .phone-notch {
+            position: absolute;
+            top: 22px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 25px;
+            background: #1a1a1a;
+            border-radius: 0 0 20px 20px;
+            z-index: 10;
+        }
+        .phone-speaker {
+            position: absolute;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: #333;
+            border-radius: 2px;
+            z-index: 11;
         }
         .screen {
             background: #FFF0F5;
@@ -42,6 +92,7 @@
             overflow: hidden;
             height: 667px;
             position: relative;
+            padding-top: 0;
         }
         .status-bar {
             background: #FF9BB3;
@@ -49,6 +100,7 @@
             text-align: center;
             color: white;
             font-size: 12px;
+            padding-top: 25px;
         }
         .nav-bar {
             background: #FF9BB3;
@@ -57,6 +109,7 @@
             font-weight: 600;
             font-size: 17px;
             text-align: center;
+            box-shadow: 0 2px 8px rgba(255,155,179,0.3);
         }
         .nav-bar-back {
             display: flex;
@@ -64,24 +117,31 @@
             align-items: center;
         }
         .nav-bar-back span:first-child {
-            font-size: 20px;
+            font-size: 22px;
+            cursor: pointer;
+            padding: 5px;
         }
         .tab-bar {
             position: absolute;
             bottom: 0;
-            width: 100%;
+            left: 0;
+            right: 0;
             background: white;
             display: flex;
             justify-content: space-around;
-            padding: 10px 0;
-            border-top: 1px solid #eee;
+            padding: 8px 0 16px;
+            border-top: 1px solid #f0f0f0;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
         }
         .tab-item {
             display: flex;
             flex-direction: column;
             align-items: center;
             color: #999;
-            font-size: 12px;
+            font-size: 11px;
+            cursor: pointer;
+            padding: 4px 20px;
+            transition: all 0.2s ease;
         }
         .tab-item.active {
             color: #FF9BB3;
@@ -89,18 +149,26 @@
         .tab-icon {
             width: 24px;
             height: 24px;
-            background: #999;
-            border-radius: 4px;
+            background: #DDDDDD;
+            border-radius: 6px;
             margin-bottom: 4px;
+            transition: all 0.2s ease;
         }
         .tab-item.active .tab-icon {
             background: #FF9BB3;
+            transform: scale(1.1);
         }
         .content {
             padding: 15px;
             padding-bottom: 70px;
             overflow-y: auto;
             height: calc(100% - 100px);
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
+        }
+        .content::-webkit-scrollbar {
+            width: 0;
+            height: 0;
         }
 
         /* Hero Section */
@@ -111,34 +179,42 @@
             margin-bottom: 15px;
             color: white;
             text-align: center;
+            box-shadow: 0 8px 25px rgba(255,155,179,0.4);
         }
         .hero-title {
-            font-size: 22px;
-            font-weight: 600;
+            font-size: 24px;
+            font-weight: 700;
             margin-bottom: 8px;
             line-height: 1.3;
+            letter-spacing: 1px;
         }
         .hero-subtitle {
             font-size: 13px;
             opacity: 0.9;
-            margin-bottom: 15px;
+            margin-bottom: 18px;
         }
         .hero-btn {
             background: white;
             color: #FF9BB3;
             border: none;
-            padding: 10px 25px;
-            border-radius: 20px;
+            padding: 12px 30px;
+            border-radius: 25px;
             font-size: 15px;
-            font-weight: 500;
+            font-weight: 600;
             cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        .hero-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
         }
 
         /* Section Title */
         .section-title {
             font-size: 16px;
             font-weight: 600;
-            margin: 15px 0 10px;
+            margin: 20px 0 12px;
             color: #333;
             display: flex;
             align-items: center;
@@ -147,7 +223,7 @@
             content: '';
             width: 4px;
             height: 16px;
-            background: #FF9BB3;
+            background: linear-gradient(180deg, #FF9BB3 0%, #FF6B8A 100%);
             border-radius: 2px;
             margin-right: 8px;
         }
@@ -155,38 +231,45 @@
         /* Activity Cards */
         .activity-card {
             background: white;
-            border-radius: 12px;
+            border-radius: 14px;
             overflow: hidden;
-            margin-bottom: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
             cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .activity-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255,155,179,0.2);
         }
         .card-image {
             width: 100%;
-            height: 150px;
+            height: 160px;
             object-fit: cover;
         }
         .card-body {
-            padding: 12px;
+            padding: 14px;
         }
         .card-title {
             font-size: 16px;
             font-weight: 600;
             color: #333;
             margin-bottom: 8px;
+            line-height: 1.3;
         }
         .card-tags {
             display: flex;
             flex-wrap: wrap;
             gap: 6px;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
         .tag {
             background: #FFF0F5;
             color: #FF9BB3;
-            padding: 3px 8px;
+            padding: 4px 10px;
             border-radius: 4px;
             font-size: 12px;
+            font-weight: 500;
         }
         .card-footer {
             display: flex;
@@ -198,17 +281,18 @@
             color: #999;
         }
         .price {
-            font-size: 16px;
-            font-weight: 600;
+            font-size: 18px;
+            font-weight: 700;
             color: #FF6B8A;
         }
 
         /* Value Cards */
         .value-section {
             background: white;
-            border-radius: 12px;
-            padding: 15px;
+            border-radius: 14px;
+            padding: 18px;
             margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
         }
         .value-grid {
             display: flex;
@@ -217,25 +301,31 @@
         .value-card {
             flex: 1;
             text-align: center;
-            padding: 15px 10px;
+            padding: 12px 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .value-card:hover {
+            transform: translateY(-5px);
         }
         .value-icon {
-            width: 45px;
-            height: 45px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
-            background: #FFF0F5;
+            background: linear-gradient(135deg, #FFF0F5 0%, #FFE4EC 100%);
             color: #FF9BB3;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
+            font-size: 22px;
             margin: 0 auto 10px;
+            box-shadow: 0 4px 12px rgba(255,155,179,0.2);
         }
         .value-title {
             font-size: 14px;
             font-weight: 600;
             color: #333;
-            margin-bottom: 5px;
+            margin-bottom: 4px;
         }
         .value-desc {
             font-size: 11px;
@@ -246,8 +336,9 @@
         /* Community Section */
         .community-section {
             background: white;
-            border-radius: 12px;
-            padding: 15px;
+            border-radius: 14px;
+            padding: 18px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
         }
         .community-grid {
             display: flex;
@@ -256,19 +347,25 @@
         .community-item {
             flex: 1;
             text-align: center;
-            padding: 10px;
+            padding: 10px 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .community-item:hover {
+            transform: translateY(-3px);
         }
         .community-icon {
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
-            background: #FFF0F5;
+            background: linear-gradient(135deg, #FFF0F5 0%, #FFE4EC 100%);
             color: #FF9BB3;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
+            font-size: 20px;
             margin: 0 auto 8px;
+            box-shadow: 0 4px 10px rgba(255,155,179,0.2);
         }
         .community-title {
             font-size: 13px;
@@ -279,10 +376,11 @@
         /* Detail Page */
         .detail-header {
             position: relative;
+            height: 220px;
         }
         .detail-image {
             width: 100%;
-            height: 200px;
+            height: 100%;
             object-fit: cover;
         }
         .detail-overlay {
@@ -290,71 +388,81 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background: linear-gradient(transparent, rgba(0,0,0,0.6));
-            padding: 30px 15px 15px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            padding: 40px 15px 15px;
             color: white;
         }
         .detail-title {
-            font-size: 20px;
-            font-weight: 600;
+            font-size: 22px;
+            font-weight: 700;
             margin-bottom: 8px;
         }
         .detail-info {
             display: flex;
             gap: 15px;
             font-size: 13px;
-            opacity: 0.9;
+            opacity: 0.95;
         }
         .detail-content {
             padding: 15px;
+            background: #FFF0F5;
+            min-height: calc(100% - 220px);
         }
         .detail-price {
-            font-size: 24px;
-            font-weight: 600;
+            font-size: 28px;
+            font-weight: 700;
             color: #FF6B8A;
             margin-bottom: 15px;
         }
         .detail-desc {
             font-size: 14px;
-            line-height: 1.6;
-            color: #666;
+            line-height: 1.7;
+            color: #555;
             margin-bottom: 20px;
+            text-align: justify;
         }
         .btn {
             background: linear-gradient(135deg, #FF9BB3 0%, #FF6B8A 100%);
             color: white;
             border: none;
-            padding: 12px;
-            border-radius: 25px;
+            padding: 14px;
+            border-radius: 28px;
             font-size: 16px;
-            font-weight: 500;
+            font-weight: 600;
             width: 100%;
             cursor: pointer;
+            box-shadow: 0 6px 20px rgba(255,155,179,0.4);
+            transition: all 0.3s ease;
         }
-        .btn:active { opacity: 0.9; }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255,155,179,0.5);
+        }
 
         /* Profile Page */
         .profile-header {
             background: linear-gradient(135deg, #FF9BB3 0%, #FFC0CB 100%);
-            padding: 30px 15px 20px;
+            padding: 40px 15px 30px;
             text-align: center;
             color: white;
+            padding-top: 50px;
         }
         .avatar {
-            width: 80px;
-            height: 80px;
+            width: 90px;
+            height: 90px;
             border-radius: 50%;
             background: rgba(255,255,255,0.3);
-            margin: 0 auto 10px;
+            margin: 0 auto 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 32px;
+            font-size: 36px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
         }
         .username {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 5px;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 6px;
         }
         .user-desc {
             font-size: 13px;
@@ -364,18 +472,18 @@
             display: flex;
             justify-content: space-around;
             background: white;
-            padding: 20px 15px;
-            margin: -10px 15px 15px;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            padding: 22px 15px;
+            margin: -15px 15px 15px;
+            border-radius: 14px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
             position: relative;
         }
         .stat-item {
             text-align: center;
         }
         .stat-value {
-            font-size: 20px;
-            font-weight: 600;
+            font-size: 24px;
+            font-weight: 700;
             color: #FF9BB3;
         }
         .stat-label {
@@ -385,28 +493,37 @@
         }
         .menu-list {
             background: white;
-            border-radius: 12px;
+            border-radius: 14px;
             overflow: hidden;
-            margin-bottom: 12px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
         }
         .menu-item {
             display: flex;
             align-items: center;
-            padding: 15px;
+            padding: 16px 15px;
             border-bottom: 1px solid #f5f5f5;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .menu-item:hover {
+            background: #FAFAFA;
+            padding-left: 20px;
         }
         .menu-item:last-child { border-bottom: none; }
         .menu-icon {
-            width: 24px;
-            height: 24px;
-            background: #FF9BB3;
-            border-radius: 6px;
-            margin-right: 12px;
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, #FF9BB3 0%, #FF6B8A 100%);
+            border-radius: 8px;
+            margin-right: 14px;
+            box-shadow: 0 2px 8px rgba(255,155,179,0.3);
         }
         .menu-text {
             flex: 1;
             font-size: 15px;
             color: #333;
+            font-weight: 500;
         }
         .menu-arrow {
             width: 0;
@@ -427,69 +544,96 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0,0,0,0.6);
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 100;
+            z-index: 1000;
             display: none;
+            backdrop-filter: blur(4px);
         }
         .modal-mask.active { display: flex; }
         .modal-content {
             background: white;
-            width: 340px;
-            border-radius: 16px;
+            width: 320px;
+            border-radius: 20px;
             overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: modalIn 0.3s ease;
+        }
+        @keyframes modalIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
         }
         .modal-header {
-            padding: 20px;
+            padding: 25px 20px;
             text-align: center;
             border-bottom: 1px solid #f0f0f0;
         }
         .modal-icon {
-            width: 60px;
-            height: 60px;
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
-            background: #FF9BB3;
-            margin: 0 auto 10px;
+            background: linear-gradient(135deg, #FF9BB3 0%, #FF6B8A 100%);
+            margin: 0 auto 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 28px;
+            font-size: 32px;
+            box-shadow: 0 6px 20px rgba(255,155,179,0.4);
         }
         .modal-title {
-            font-size: 18px;
-            font-weight: 600;
+            font-size: 19px;
+            font-weight: 700;
             color: #333;
         }
         .modal-body {
-            padding: 20px;
+            padding: 25px 20px;
         }
         .modal-input {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #eee;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            font-size: 14px;
+            padding: 14px;
+            border: 1px solid #E8E8E8;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            font-size: 15px;
+            transition: all 0.2s ease;
+        }
+        .modal-input:focus {
+            outline: none;
+            border-color: #FF9BB3;
+            box-shadow: 0 0 0 3px rgba(255,155,179,0.2);
         }
         .modal-btn {
             width: 100%;
-            background: #FF9BB3;
+            background: linear-gradient(135deg, #FF9BB3 0%, #FF6B8A 100%);
             color: white;
             border: none;
-            padding: 12px;
-            border-radius: 8px;
-            font-size: 15px;
-            font-weight: 500;
+            padding: 14px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
             cursor: pointer;
+            box-shadow: 0 6px 20px rgba(255,155,179,0.4);
+            transition: all 0.3s ease;
+        }
+        .modal-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255,155,179,0.5);
         }
         .modal-close {
-            margin-top: 10px;
+            margin-top: 12px;
             text-align: center;
             color: #999;
             font-size: 14px;
             cursor: pointer;
+            padding: 8px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+        .modal-close:hover {
+            background: #F5F5F5;
+            color: #666;
         }
     </style>
 </head>
@@ -500,250 +644,263 @@
         <button onclick="showPage('profile')">个人中心</button>
     </div>
     
-    <div class="phone-frame">
-        <div class="screen">
-            <!-- 首页 -->
-            <div class="page active" id="index">
-                <div class="status-bar">9:41</div>
-                <div class="nav-bar">下午茶时光</div>
-                <div class="content">
-                    <!-- Hero Banner -->
-                    <div class="hero-section">
-                        <div class="hero-title">美丽下午茶时光</div>
-                        <div class="hero-subtitle">遇见更好的自己与有趣的灵魂</div>
-                        <button class="hero-btn" onclick="showModal()">立即加入</button>
-                    </div>
+    <div class="phone-container">
+        <div class="phone-frame">
+            <div class="phone-notch"></div>
+            <div class="phone-speaker"></div>
+            <div class="screen">
+                <!-- 首页 -->
+                <div class="page active" id="index">
+                    <div class="status-bar">9:41</div>
+                    <div class="nav-bar">下午茶时光</div>
+                    <div class="content">
+                        <div class="hero-section">
+                            <div class="hero-title">美丽下午茶时光</div>
+                            <div class="hero-subtitle">遇见更好的自己与有趣的灵魂</div>
+                            <button class="hero-btn" onclick="showModal()">立即加入</button>
+                        </div>
 
-                    <!-- Core Values -->
-                    <div class="value-section">
-                        <div class="section-title">核心价值</div>
-                        <div class="value-grid">
-                            <div class="value-card">
-                                <div class="value-icon">🔍</div>
-                                <div class="value-title">发现美</div>
-                                <div class="value-desc">精选城市优质活动</div>
+                        <div class="value-section">
+                            <div class="section-title">核心价值</div>
+                            <div class="value-grid">
+                                <div class="value-card">
+                                    <div class="value-icon">🔍</div>
+                                    <div class="value-title">发现美</div>
+                                    <div class="value-desc">精选城市优质活动</div>
+                                </div>
+                                <div class="value-card">
+                                    <div class="value-icon">👭</div>
+                                    <div class="value-title">连接人</div>
+                                    <div class="value-desc">智能匹配同频好友</div>
+                                </div>
+                                <div class="value-card">
+                                    <div class="value-icon">💗</div>
+                                    <div class="value-title">愉悦心</div>
+                                    <div class="value-desc">高品质体验舒缓压力</div>
+                                </div>
                             </div>
-                            <div class="value-card">
-                                <div class="value-icon">👭</div>
-                                <div class="value-title">连接人</div>
-                                <div class="value-desc">智能匹配同频好友</div>
+                        </div>
+
+                        <div class="section-title">热门活动</div>
+                        <div class="activity-card" onclick="showPage('detail')">
+                            <img class="card-image" src="https://picsum.photos/id/431/600/400" alt="法式甜品">
+                            <div class="card-body">
+                                <div class="card-title">法式甜品制作体验</div>
+                                <div class="card-tags">
+                                    <span class="tag">#下午茶</span>
+                                    <span class="tag">#甜品</span>
+                                </div>
+                                <div class="card-footer">
+                                    <span class="participants">128人已报名</span>
+                                    <span class="price">¥199</span>
+                                </div>
                             </div>
-                            <div class="value-card">
-                                <div class="value-icon">💗</div>
-                                <div class="value-title">愉悦心</div>
-                                <div class="value-desc">高品质体验舒缓压力</div>
+                        </div>
+                        <div class="activity-card">
+                            <img class="card-image" src="https://picsum.photos/id/118/600/400" alt="花艺沙龙">
+                            <div class="card-body">
+                                <div class="card-title">周末花艺插花沙龙</div>
+                                <div class="card-tags">
+                                    <span class="tag">#花艺</span>
+                                    <span class="tag">#美学</span>
+                                </div>
+                                <div class="card-footer">
+                                    <span class="participants">96人已报名</span>
+                                    <span class="price">¥258</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="activity-card">
+                            <img class="card-image" src="https://picsum.photos/id/175/600/400" alt="艺术画展">
+                            <div class="card-body">
+                                <div class="card-title">小众艺术画展赏析</div>
+                                <div class="card-tags">
+                                    <span class="tag">#画展</span>
+                                    <span class="tag">#文艺</span>
+                                </div>
+                                <div class="card-footer">
+                                    <span class="participants">75人已报名</span>
+                                    <span class="price">¥88</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="activity-card">
+                            <img class="card-image" src="https://picsum.photos/id/225/600/400" alt="闺蜜聚会">
+                            <div class="card-body">
+                                <div class="card-title">闺蜜轻奢下午茶聚会</div>
+                                <div class="card-tags">
+                                    <span class="tag">#社交</span>
+                                    <span class="tag">#下午茶</span>
+                                </div>
+                                <div class="card-footer">
+                                    <span class="participants">152人已报名</span>
+                                    <span class="price">¥168</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="community-section">
+                            <div class="section-title">社区分享</div>
+                            <div class="community-grid">
+                                <div class="community-item">
+                                    <div class="community-icon">📷</div>
+                                    <div class="community-title">美好瞬间</div>
+                                </div>
+                                <div class="community-item">
+                                    <div class="community-icon">💡</div>
+                                    <div class="community-title">生活灵感</div>
+                                </div>
+                                <div class="community-item">
+                                    <div class="community-icon">🔗</div>
+                                    <div class="community-title">一键分享</div>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <div class="tab-bar">
+                        <div class="tab-item active" onclick="showPage('index')">
+                            <div class="tab-icon"></div>
+                            <span>发现</span>
+                        </div>
+                        <div class="tab-item" onclick="showPage('profile')">
+                            <div class="tab-icon"></div>
+                            <span>我的</span>
+                        </div>
+                    </div>
+                </div>
 
-                    <!-- Activity List -->
-                    <div class="section-title">热门活动</div>
-                    <div class="activity-card" onclick="showPage('detail')">
-                        <img class="card-image" src="https://picsum.photos/id/431/600/400" alt="法式甜品">
-                        <div class="card-body">
-                            <div class="card-title">法式甜品制作体验</div>
+                <!-- 活动详情页 -->
+                <div class="page" id="detail">
+                    <div class="status-bar">9:41</div>
+                    <div class="nav-bar nav-bar-back">
+                        <span onclick="showPage('index')">‹</span>
+                        <span>活动详情</span>
+                        <span style="width:20px;"></span>
+                    </div>
+                    <div class="content" style="padding:0;">
+                        <div class="detail-header">
+                            <img class="detail-image" src="https://picsum.photos/id/431/600/400" alt="活动图片">
+                            <div class="detail-overlay">
+                                <div class="detail-title">法式甜品制作体验</div>
+                                <div class="detail-info">
+                                    <span>周五 14:00</span>
+                                    <span>市中心某咖啡馆</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="detail-content">
+                            <div class="detail-price">¥199</div>
                             <div class="card-tags">
                                 <span class="tag">#下午茶</span>
                                 <span class="tag">#甜品</span>
+                                <span class="tag">#体验课</span>
                             </div>
-                            <div class="card-footer">
-                                <span class="participants">128人已报名</span>
-                                <span class="price">¥199</span>
+                            <div style="margin-top:15px;color:#999;font-size:13px;">
+                                <span>128人已报名</span>
+                                <span style="margin:0 10px;">|</span>
+                                <span>剩余22个名额</span>
                             </div>
+                            <div class="detail-desc">
+                                专业甜品师手把手教学，体验法式甜品的精致魅力。本次活动将带你领略法式甜品的优雅与浪漫，从基础的奶油打发到精致的装饰技巧，让你轻松掌握甜品制作的精髓。
+                            </div>
+                            <div style="margin-bottom:20px;">
+                                <p style="font-weight:600;color:#333;margin-bottom:8px;font-size:15px;">活动流程</p>
+                                <ul style="color:#666;font-size:13px;line-height:1.8;">
+                                    <li>• 14:00 - 签到入场，领取材料包</li>
+                                    <li>• 14:30 - 甜品师讲解制作要点</li>
+                                    <li>• 15:00 - 手作体验环节</li>
+                                    <li>• 16:00 - 作品展示与合影</li>
+                                </ul>
+                            </div>
+                            <button class="btn">立即报名</button>
                         </div>
                     </div>
-                    <div class="activity-card">
-                        <img class="card-image" src="https://picsum.photos/id/118/600/400" alt="花艺沙龙">
-                        <div class="card-body">
-                            <div class="card-title">周末花艺插花沙龙</div>
-                            <div class="card-tags">
-                                <span class="tag">#花艺</span>
-                                <span class="tag">#美学</span>
-                            </div>
-                            <div class="card-footer">
-                                <span class="participants">96人已报名</span>
-                                <span class="price">¥258</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="activity-card">
-                        <img class="card-image" src="https://picsum.photos/id/175/600/400" alt="艺术画展">
-                        <div class="card-body">
-                            <div class="card-title">小众艺术画展赏析</div>
-                            <div class="card-tags">
-                                <span class="tag">#画展</span>
-                                <span class="tag">#文艺</span>
-                            </div>
-                            <div class="card-footer">
-                                <span class="participants">75人已报名</span>
-                                <span class="price">¥88</span>
-                            </div>
-                        </div>
-                    </div>
+                </div>
 
-                    <!-- Community Features -->
-                    <div class="community-section">
-                        <div class="section-title">社区分享</div>
-                        <div class="community-grid">
-                            <div class="community-item">
-                                <div class="community-icon">📷</div>
-                                <div class="community-title">美好瞬间</div>
-                            </div>
-                            <div class="community-item">
-                                <div class="community-icon">💡</div>
-                                <div class="community-title">生活灵感</div>
-                            </div>
-                            <div class="community-item">
-                                <div class="community-icon">🔗</div>
-                                <div class="community-title">一键分享</div>
-                            </div>
+                <!-- 个人中心页 -->
+                <div class="page" id="profile">
+                    <div class="status-bar">9:41</div>
+                    <div class="nav-bar">我的</div>
+                    <div class="content" style="padding:0;">
+                        <div class="profile-header">
+                            <div class="avatar">👩</div>
+                            <div class="username">优雅下午茶</div>
+                            <div class="user-desc">热爱生活，享受每一个美好瞬间</div>
                         </div>
-                    </div>
-                </div>
-                <div class="tab-bar">
-                    <div class="tab-item active" onclick="showPage('index')">
-                        <div class="tab-icon"></div>
-                        <span>发现</span>
-                    </div>
-                    <div class="tab-item" onclick="showPage('profile')">
-                        <div class="tab-icon"></div>
-                        <span>我的</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 活动详情页 -->
-            <div class="page" id="detail">
-                <div class="status-bar">9:41</div>
-                <div class="nav-bar nav-bar-back">
-                    <span onclick="showPage('index')">‹</span>
-                    <span>活动详情</span>
-                    <span style="width:20px;"></span>
-                </div>
-                <div class="content" style="padding:0;padding-bottom:70px;">
-                    <div class="detail-header">
-                        <img class="detail-image" src="https://picsum.photos/id/431/600/400" alt="活动图片">
-                        <div class="detail-overlay">
-                            <div class="detail-title">法式甜品制作体验</div>
-                            <div class="detail-info">
-                                <span>周五 14:00</span>
-                                <span>市中心某咖啡馆</span>
+                        <div class="stats">
+                            <div class="stat-item">
+                                <div class="stat-value">12</div>
+                                <div class="stat-label">参与活动</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">89</div>
+                                <div class="stat-label">关注</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">156</div>
+                                <div class="stat-label">粉丝</div>
                             </div>
                         </div>
-                    </div>
-                    <div class="detail-content">
-                        <div class="detail-price">¥199</div>
-                        <div class="card-tags">
-                            <span class="tag">#下午茶</span>
-                            <span class="tag">#甜品</span>
-                            <span class="tag">#体验课</span>
-                        </div>
-                        <div style="margin-top:15px;color:#999;font-size:13px;">
-                            <span>128人已报名</span>
-                            <span style="margin:0 10px;">|</span>
-                            <span>剩余22个名额</span>
-                        </div>
-                        <div class="detail-desc">
-                            专业甜品师手把手教学，体验法式甜品的精致魅力。本次活动将带你领略法式甜品的优雅与浪漫，从基础的奶油打发到精致的装饰技巧，让你轻松掌握甜品制作的精髓。
-                        </div>
-                        <div style="margin-bottom:20px;">
-                            <p style="font-weight:600;color:#333;margin-bottom:8px;">活动流程</p>
-                            <ul style="color:#666;font-size:13px;line-height:1.6;">
-                                <li>• 14:00 签到入场</li>
-                                <li>• 14:30 手作/体验环节</li>
-                                <li>• 16:00 自由交流合影</li>
-                            </ul>
-                        </div>
-                        <button class="btn">立即报名</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 个人中心页 -->
-            <div class="page" id="profile">
-                <div class="status-bar">9:41</div>
-                <div class="nav-bar">我的</div>
-                <div class="content" style="padding:0;padding-bottom:70px;">
-                    <div class="profile-header">
-                        <div class="avatar">👩</div>
-                        <div class="username">优雅下午茶</div>
-                        <div class="user-desc">热爱生活，享受每一个美好瞬间</div>
-                    </div>
-                    <div class="stats">
-                        <div class="stat-item">
-                            <div class="stat-value">12</div>
-                            <div class="stat-label">参与活动</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-value">89</div>
-                            <div class="stat-label">关注</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-value">156</div>
-                            <div class="stat-label">粉丝</div>
-                        </div>
-                    </div>
-                    <div class="menu-list">
-                        <div class="menu-item">
-                            <div class="menu-icon"></div>
-                            <span class="menu-text">我的活动</span>
-                            <div class="menu-arrow"></div>
-                        </div>
-                        <div class="menu-item">
-                            <div class="menu-icon"></div>
-                            <span class="menu-text">我的收藏</span>
-                            <div class="menu-arrow"></div>
-                        </div>
-                        <div class="menu-item">
-                            <div class="menu-icon"></div>
-                            <span class="menu-text">我的关注</span>
-                            <div class="menu-arrow"></div>
-                        </div>
-                        <div class="menu-item">
-                            <div class="menu-icon"></div>
-                            <span class="menu-text">会员中心</span>
-                            <div class="menu-arrow"></div>
-                        </div>
-                        <div class="menu-item">
-                            <div class="menu-icon"></div>
-                            <span class="menu-text">设置</span>
-                            <div class="menu-arrow"></div>
-                        </div>
-                    </div>
-                    <!-- Social Features -->
-                    <div class="community-section" style="margin-top:15px;">
-                        <div class="section-title">社交功能</div>
-                        <div class="community-grid">
-                            <div class="community-item">
-                                <div class="community-icon">💬</div>
-                                <div class="community-title">活动群聊</div>
+                        <div class="menu-list">
+                            <div class="menu-item">
+                                <div class="menu-icon"></div>
+                                <span class="menu-text">我的活动</span>
+                                <div class="menu-arrow"></div>
                             </div>
-                            <div class="community-item">
-                                <div class="community-icon">🔒</div>
-                                <div class="community-title">私密私聊</div>
+                            <div class="menu-item">
+                                <div class="menu-icon"></div>
+                                <span class="menu-text">我的收藏</span>
+                                <div class="menu-arrow"></div>
                             </div>
-                            <div class="community-item">
-                                <div class="community-icon">🛡️</div>
-                                <div class="community-title">安全机制</div>
+                            <div class="menu-item">
+                                <div class="menu-icon"></div>
+                                <span class="menu-text">我的关注</span>
+                                <div class="menu-arrow"></div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-icon"></div>
+                                <span class="menu-text">会员中心</span>
+                                <div class="menu-arrow"></div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-icon"></div>
+                                <span class="menu-text">设置</span>
+                                <div class="menu-arrow"></div>
+                            </div>
+                        </div>
+                        <div class="community-section" style="margin:15px;">
+                            <div class="section-title">社交功能</div>
+                            <div class="community-grid">
+                                <div class="community-item">
+                                    <div class="community-icon">💬</div>
+                                    <div class="community-title">活动群聊</div>
+                                </div>
+                                <div class="community-item">
+                                    <div class="community-icon">🔒</div>
+                                    <div class="community-title">私密私聊</div>
+                                </div>
+                                <div class="community-item">
+                                    <div class="community-icon">🛡️</div>
+                                    <div class="community-title">安全机制</div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="tab-bar">
-                    <div class="tab-item" onclick="showPage('index')">
-                        <div class="tab-icon"></div>
-                        <span>发现</span>
-                    </div>
-                    <div class="tab-item active" onclick="showPage('profile')">
-                        <div class="tab-icon"></div>
-                        <span>我的</span>
+                    <div class="tab-bar">
+                        <div class="tab-item" onclick="showPage('index')">
+                            <div class="tab-icon"></div>
+                            <span>发现</span>
+                        </div>
+                        <div class="tab-item active" onclick="showPage('profile')">
+                            <div class="tab-icon"></div>
+                            <span>我的</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Modal -->
     <div class="modal-mask" id="joinModal">
         <div class="modal-content">
             <div class="modal-header">
