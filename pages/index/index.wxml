@@ -1,0 +1,70 @@
+<view class="container">
+  <view class="hero-section">
+    <view class="hero-bg">
+      <view class="hero-content">
+        <text class="hero-title">美丽下午茶时光</text>
+        <text class="hero-subtitle">遇见更好的自己与有趣的灵魂</text>
+        <button class="join-btn">立即加入</button>
+      </view>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">精选活动</text>
+      <text class="section-subtitle">温柔相聚，邂逅同频有趣的闺蜜时光</text>
+    </view>
+    
+    <view class="activity-list">
+      <view 
+        class="activity-card" 
+        wx:for="{{activities}}" 
+        wx:key="id"
+        bindtap="goToDetail"
+        data-id="{{item.id}}"
+      >
+        <image class="card-image" src="{{item.image}}" mode="aspectFill" />
+        <view class="card-body">
+          <text class="card-title">{{item.title}}</text>
+          <view class="card-tags">
+            <text class="tag" wx:for="{{item.tags}}" wx:key="index">{{item}}</text>
+          </view>
+          <view class="card-footer">
+            <text class="participants">{{item.participants}}人已报名</text>
+            <text class="price">¥{{item.price}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">产品核心价值</text>
+    </view>
+    
+    <view class="value-list">
+      <view class="value-card">
+        <view class="value-icon">
+          <text class="icon-text">✨</text>
+        </view>
+        <text class="value-title">发现美</text>
+        <text class="value-desc">精选城市优质活动</text>
+      </view>
+      <view class="value-card">
+        <view class="value-icon">
+          <text class="icon-text">🤝</text>
+        </view>
+        <text class="value-title">连接人</text>
+        <text class="value-desc">智能匹配同频好友</text>
+      </view>
+      <view class="value-card">
+        <view class="value-icon">
+          <text class="icon-text">💖</text>
+        </view>
+        <text class="value-title">愉悦心</text>
+        <text class="value-desc">高品质体验舒缓压力</text>
+      </view>
+    </view>
+  </view>
+</view>

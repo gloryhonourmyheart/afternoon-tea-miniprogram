@@ -1,0 +1,62 @@
+<view class="container">
+  <view class="detail-header">
+    <image class="detail-image" src="{{activity.image}}" mode="aspectFill" />
+    <view class="detail-overlay">
+      <text class="detail-title">{{activity.title}}</text>
+    </view>
+  </view>
+
+  <view class="detail-content">
+    <view class="info-section">
+      <view class="info-item">
+        <text class="info-icon">🕐</text>
+        <text class="info-text">{{activity.time}}</text>
+      </view>
+      <view class="info-item">
+        <text class="info-icon">📍</text>
+        <text class="info-text">{{activity.location}}</text>
+      </view>
+    </view>
+
+    <view class="price-section">
+      <text class="price-label">活动价格</text>
+      <text class="price-value">¥{{activity.price}}</text>
+      <text class="participants">{{activity.participants}}人已报名</text>
+    </view>
+
+    <view class="tags-section">
+      <text class="tag" wx:for="{{activity.tags}}" wx:key="index">{{item}}</text>
+    </view>
+
+    <view class="desc-section">
+      <text class="section-title">活动介绍</text>
+      <text class="desc-text">{{activity.description}}</text>
+    </view>
+
+    <view class="schedule-section">
+      <text class="section-title">活动流程</text>
+      <view class="schedule-list">
+        <view class="schedule-item">
+          <text class="schedule-time">14:00</text>
+          <text class="schedule-desc">签到入场</text>
+        </view>
+        <view class="schedule-item">
+          <text class="schedule-time">14:30</text>
+          <text class="schedule-desc">手作/体验环节</text>
+        </view>
+        <view class="schedule-item">
+          <text class="schedule-time">16:00</text>
+          <text class="schedule-desc">自由交流合影</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="bottom-bar">
+    <button class="share-btn">
+      <text class="btn-icon">📤</text>
+      <text class="btn-text">分享</text>
+    </button>
+    <button class="book-btn">一键报名</button>
+  </view>
+</view>
