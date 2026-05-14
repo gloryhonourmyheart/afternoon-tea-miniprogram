@@ -12,6 +12,7 @@
   </view>
 
   <scroll-view scroll-y class="content">
+    <!-- 美好瞬间 -->
     <block wx:if="{{activeTab === 0}}">
       <view class="moment-card" wx:for="{{moments}}" wx:key="id">
         <view class="moment-header">
@@ -40,30 +41,20 @@
       </view>
     </block>
 
+    <!-- 生活灵感 -->
     <block wx:if="{{activeTab === 1}}">
-      <view class="moment-card" wx:for="{{inspirations}}" wx:key="id">
-        <view class="moment-header">
-          <view class="avatar">{{item.avatar}}</view>
-          <view class="user-info">
-            <text class="username">{{item.username}}</text>
-            <text class="time">{{item.time}}</text>
+      <view class="inspiration-card" wx:for="{{inspirations}}" wx:key="id">
+        <view class="inspiration-header">
+          <view class="inspiration-icon">{{item.icon}}</view>
+          <text class="inspiration-title">{{item.title}}</text>
+        </view>
+        <view class="inspiration-content">
+          <view class="inspiration-item" wx:for="{{item.items}}" wx:key="index" wx:for-item="subItem">
+            <text>{{subItem}}</text>
           </view>
         </view>
-        <image class="moment-image" src="{{item.image}}" mode="aspectFill"></image>
-        <view class="moment-content">{{item.content}}</view>
-        <view class="moment-actions">
-          <view class="action-item" bindtap="likeMoment" data-id="{{item.id}}">
-            <text class="action-icon">❤️</text>
-            <text class="action-text">{{item.likes}}</text>
-          </view>
-          <view class="action-item">
-            <text class="action-icon">💬</text>
-            <text class="action-text">{{item.comments}}</text>
-          </view>
-          <view class="action-item" bindtap="shareMoment" data-id="{{item.id}}">
-            <text class="action-icon">🔗</text>
-            <text class="action-text">分享</text>
-          </view>
+        <view class="inspiration-footer">
+          <text class="inspiration-tag" wx:for="{{item.tags}}" wx:key="index">{{subItem}}</text>
         </view>
       </view>
     </block>

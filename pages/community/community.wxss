@@ -64,6 +64,7 @@
   padding-bottom: 70px;
 }
 
+/* 美好瞬间卡片 */
 .moment-card {
   background: white;
   border-radius: 14px;
@@ -151,6 +152,64 @@
 .action-text {
   font-size: 13px;
   color: #999;
+}
+
+/* 生活灵感卡片 */
+.inspiration-card {
+  background: white;
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+  border-left: 4px solid #FF9BB3;
+}
+
+.inspiration-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.inspiration-icon {
+  font-size: 28px;
+  margin-right: 12px;
+}
+
+.inspiration-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.inspiration-content {
+  margin-bottom: 15px;
+}
+
+.inspiration-item {
+  padding: 10px 12px;
+  background: #FFF5F7;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #555;
+}
+
+.inspiration-item:last-child {
+  margin-bottom: 0;
+}
+
+.inspiration-footer {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.inspiration-tag {
+  padding: 5px 12px;
+  background: linear-gradient(135deg, #FFE4EB 0%, #FFD4E0 100%);
+  border-radius: 15px;
+  font-size: 12px;
+  color: #FF6B8A;
 }
 
 .tab-bar {

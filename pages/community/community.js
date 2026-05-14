@@ -37,33 +37,31 @@ Page({
     inspirations: [
       {
         id: 1,
-        avatar: 'S',
-        username: 'Sophia穿搭',
-        image: 'https://picsum.photos/id/180/600/400',
-        content: '今日OOTD：温柔粉色系，适合下午茶约会 💕',
-        likes: 342,
-        comments: 67,
-        time: '3小时前'
+        icon: '🍵',
+        title: '下午茶仪式感清单',
+        items: ['精致的骨瓷茶具', '三层点心架', '新鲜鲜花装饰', '轻柔的背景音乐'],
+        tags: ['#仪式感', '#下午茶']
       },
       {
         id: 2,
-        avatar: 'E',
-        username: 'Emma美妆',
-        image: 'https://picsum.photos/id/292/600/400',
-        content: '约会必备妆容教程，自然又精致 ✨',
-        likes: 521,
-        comments: 89,
-        time: '6小时前'
+        icon: '📚',
+        title: '适合下午茶阅读的书籍推荐',
+        items: ['《小妇人》- 温馨治愈', '《山茶文具店》- 温暖人心', '《面包和汤和猫咪好天气》- 治愈系', '《人间草木》- 汪曾祺散文'],
+        tags: ['#书单', '#阅读']
       },
       {
         id: 3,
-        avatar: 'R',
-        username: 'Rose家居',
-        image: 'https://picsum.photos/id/360/600/400',
-        content: '打造温馨小角落，香薰+绿植=治愈时光 🌿',
-        likes: 278,
-        comments: 54,
-        time: '1天前'
+        icon: '🎵',
+        title: '下午茶BGM推荐',
+        items: ['钢琴轻音乐 - 放松心情', '爵士咖啡馆 - 慵懒惬意', '自然白噪音 - 治愈解压', '古典音乐 - 优雅氛围'],
+        tags: ['#音乐', '#BGM']
+      },
+      {
+        id: 4,
+        icon: '🌸',
+        title: '春日下午茶穿搭灵感',
+        items: ['碎花连衣裙 + 草帽', '温柔针织开衫 + 半身裙', '复古格纹套装', '浅色衬衫 + 牛仔裤'],
+        tags: ['#穿搭', '#春日']
       }
     ]
   },
@@ -77,14 +75,12 @@ Page({
 
   likeMoment(e) {
     const id = e.currentTarget.dataset.id;
-    const tab = this.data.activeTab;
-    const list = tab === 0 ? 'moments' : 'inspirations';
-    const moments = this.data[list];
+    const moments = this.data.moments;
     const moment = moments.find(m => m.id === id);
     if (moment) {
       moment.likes++;
       this.setData({
-        [list]: moments
+        moments: moments
       });
     }
   },
