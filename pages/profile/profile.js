@@ -8,5 +8,11 @@ Page({
       title: '功能开发中',
       icon: 'none'
     })
+  },
+
+  navigateToHistory: function() {
+    wx.navigateTo({
+      url: '/pages/history/history'
+    });
   }
 })

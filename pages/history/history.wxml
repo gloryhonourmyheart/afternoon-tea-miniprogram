@@ -1,0 +1,42 @@
+<view class="history-page">
+  <view class="status-bar">9:41</view>
+  <view class="nav-bar nav-bar-back">
+    <text class="back-btn" bindtap="goBack">‹</text>
+    <text class="nav-title">参加历史</text>
+    <text class="placeholder"></text>
+  </view>
+
+  <scroll-view scroll-y class="content">
+    <view class="history-summary">
+      <text class="summary-text">共参加了 {{totalCount}} 场活动</text>
+    </view>
+
+    <view class="timeline">
+      <block wx:for="{{historyList}}" wx:key="index">
+        <view class="timeline-section">
+          <view class="timeline-dot {{item.isActive ? 'active' : 'inactive'}}"></view>
+          <view class="timeline-month">{{item.month}}</view>
+          
+          <view class="activity-list">
+            <view 
+              class="activity-card" 
+              wx:for="{{item.activities}}" 
+              wx:key="id"
+              bindtap="viewDetail"
+              data-id="{{item.id}}"
+            >
+              <view class="activity-main">
+                <image class="activity-image" src="{{item.image}}" mode="aspectFill"/>
+                <view class="activity-info">
+                  <view class="activity-title">{{item.title}}</view>
+                  <view class="activity-date">{{item.date}}</view>
+                </view>
+                <view class="activity-status status-{{item.statusClass}}">{{item.status}}</view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </scroll-view>
+</view>

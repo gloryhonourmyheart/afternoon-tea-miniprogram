@@ -4,7 +4,8 @@
     "pages/activity/detail",
     "pages/community/community",
     "pages/profile/profile",
-    "pages/profile-detail/profile-detail"
+    "pages/profile-detail/profile-detail",
+    "pages/history/history"
   ],
   "window": {
     "backgroundColor": "#FFF0F5",
