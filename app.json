@@ -3,7 +3,8 @@
     "pages/index/index",
     "pages/activity/detail",
     "pages/community/community",
-    "pages/profile/profile"
+    "pages/profile/profile",
+    "pages/profile-detail/profile-detail"
   ],
   "window": {
     "backgroundColor": "#FFF0F5",

@@ -1,0 +1,74 @@
+<view class="profile-detail-page">
+  <view class="status-bar">9:41</view>
+  <view class="nav-bar nav-bar-back">
+    <text class="back-btn" bindtap="goBack">‹</text>
+    <text class="nav-title">个人档案</text>
+    <text class="edit-btn" bindtap="editProfile">✏️</text>
+  </view>
+
+  <scroll-view scroll-y class="content">
+    <view class="profile-header">
+      <view class="avatar-section" bindtap="changeAvatar">
+        <view class="avatar-large">{{userInfo.avatar}}</view>
+        <view class="avatar-edit">
+          <text class="edit-icon">📷</text>
+          <text class="edit-text">更换头像</text>
+        </view>
+      </view>
+      <view class="profile-basic">
+        <text class="profile-name">{{userInfo.nickname}}</text>
+        <text class="profile-desc">{{userInfo.desc}}</text>
+      </view>
+    </view>
+
+    <view class="profile-card">
+      <text class="card-title">基本信息</text>
+      <view class="info-list">
+        <view class="info-item">
+          <text class="info-label">性别</text>
+          <text class="info-value">{{userInfo.gender}}</text>
+        </view>
+        <view class="info-item">
+          <text class="info-label">生日</text>
+          <text class="info-value">{{userInfo.birthday}}</text>
+        </view>
+        <view class="info-item">
+          <text class="info-label">城市</text>
+          <text class="info-value">{{userInfo.city}}</text>
+        </view>
+        <view class="info-item">
+          <text class="info-label">职业</text>
+          <text class="info-value">{{userInfo.occupation}}</text>
+        </view>
+        <view class="info-item">
+          <text class="info-label">兴趣爱好</text>
+          <text class="info-value">{{userInfo.hobbies}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="profile-card">
+      <text class="card-title">个性签名</text>
+      <text class="signature-text">{{userInfo.signature}}</text>
+    </view>
+
+    <view class="profile-card">
+      <text class="card-title">我的标签</text>
+      <view class="tag-list">
+        <text class="tag" wx:for="{{userInfo.tags}}" wx:key="index">{{item}}</text>
+      </view>
+    </view>
+
+    <view class="profile-card">
+      <text class="card-title">个人成就</text>
+      <view class="achievement-list">
+        <view class="achievement-item" wx:for="{{userInfo.achievements}}" wx:key="index">
+          <text class="achievement-icon">{{item.icon}}</text>
+          <text class="achievement-text">{{item.text}}</text>
+        </view>
+      </view>
+    </view>
+
+    <button class="edit-btn-large" bindtap="editProfile">编辑资料</button>
+  </scroll-view>
+</view>

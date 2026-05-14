@@ -746,6 +746,150 @@
             font-size: 13px;
             color: #999;
         }
+
+        .profile-detail-header {
+            background: linear-gradient(135deg, #FF9BB3 0%, #FF6B8A 100%);
+            padding: 30px 20px;
+            border-radius: 0 0 30px 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: white;
+        }
+        .avatar-section {
+            position: relative;
+            margin-bottom: 15px;
+        }
+        .avatar-large {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: 700;
+            border: 4px solid rgba(255,255,255,0.5);
+        }
+        .avatar-edit {
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            font-size: 12px;
+            color: #FF6B8A;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .edit-icon {
+            margin-right: 4px;
+        }
+        .profile-basic {
+            text-align: center;
+        }
+        .profile-name {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+        .profile-desc {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        .profile-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        }
+        .card-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+            padding-left: 10px;
+            border-left: 4px solid #FF9BB3;
+        }
+        .info-list {
+            display: flex;
+            flex-direction: column;
+        }
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #f5f5f5;
+        }
+        .info-item:last-child {
+            border-bottom: none;
+        }
+        .info-label {
+            font-size: 14px;
+            color: #999;
+        }
+        .info-value {
+            font-size: 14px;
+            color: #333;
+            font-weight: 500;
+        }
+        .signature-text {
+            font-size: 14px;
+            color: #555;
+            line-height: 1.6;
+            padding: 10px;
+            background: #FFF5F7;
+            border-radius: 10px;
+        }
+        .tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .tag {
+            background: linear-gradient(135deg, #FFF0F5 0%, #FFE4EB 100%);
+            color: #FF6B8A;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+        }
+        .achievement-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .achievement-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background: #FFF9F0;
+            border-radius: 10px;
+        }
+        .achievement-icon {
+            font-size: 20px;
+            margin-right: 12px;
+        }
+        .achievement-text {
+            font-size: 14px;
+            color: #333;
+        }
+        .edit-profile-btn {
+            width: calc(100% - 30px);
+            margin: 0 15px 30px;
+            background: linear-gradient(135deg, #FF9BB3 0%, #FF6B8A 100%);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 40px;
+            font-size: 16px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(255,107,138,0.3);
+        }
     </style>
 </head>
 <body>
@@ -754,6 +898,7 @@
         <button onclick="showPage('detail')">活动详情</button>
         <button onclick="showPage('community')">社区分享</button>
         <button onclick="showPage('profile')">个人中心</button>
+        <button onclick="showPage('profile-detail')">个人档案</button>
     </div>
     
     <div class="phone-container">
@@ -873,6 +1018,10 @@
                         <div class="tab-item active" onclick="showPage('index')">
                             <div class="tab-icon"></div>
                             <span>发现</span>
+                        </div>
+                        <div class="tab-item" onclick="showPage('community')">
+                            <div class="tab-icon"></div>
+                            <span>社区</span>
                         </div>
                         <div class="tab-item" onclick="showPage('profile')">
                             <div class="tab-icon"></div>
@@ -1104,14 +1253,123 @@
                             <div class="tab-icon"></div>
                             <span>发现</span>
                         </div>
+                        <div class="tab-item" onclick="showPage('community')">
+                            <div class="tab-icon"></div>
+                            <span>社区</span>
+                        </div>
                         <div class="tab-item active" onclick="showPage('profile')">
                             <div class="tab-icon"></div>
                             <span>我的</span>
                         </div>
                     </div>
                 </div>
+
+                <!-- 个人档案页面 -->
+                <div class="page" id="profile-detail">
+                    <div class="status-bar">9:41</div>
+                    <div class="nav-bar nav-bar-back">
+                        <span onclick="showPage('profile')">‹</span>
+                        <span>个人档案</span>
+                        <span style="width:20px;">✏️</span>
+                    </div>
+                    <div class="content" style="padding:0;">
+                        <div style="background: linear-gradient(135deg, #FF9BB3 0%, #FF6B8A 100%); padding: 30px 20px; display: flex; flex-direction: column; align-items: center; color: white;">
+                            <div style="position: relative; margin-bottom: 15px;">
+                                <div style="width: 100px; height: 100px; border-radius: 50%; background: rgba(255,255,255,0.3); display: flex; align-items: center; justify-content: center; font-size: 32px; font-weight: 700; border: 4px solid rgba(255,255,255,0.5);">优雅</div>
+                                <div style="position: absolute; bottom: -5px; left: 50%; transform: translateX(-50%); background: white; padding: 6px 12px; border-radius: 20px; display: flex; align-items: center; font-size: 12px; color: #FF6B8A;">
+                                    <span>📷</span>
+                                    <span style="margin-left: 4px;">更换头像</span>
+                                </div>
+                            </div>
+                            <div style="text-align: center;">
+                                <div style="font-size: 20px; font-weight: 700; margin-bottom: 6px;">优雅下午茶</div>
+                                <div style="font-size: 14px; opacity: 0.9;">热爱生活，享受每一个美好瞬间</div>
+                            </div>
+                        </div>
+
+                        <div style="background: white; border-radius: 16px; padding: 20px; margin: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.06);">
+                            <div style="font-size: 16px; font-weight: 600; color: #333; margin-bottom: 15px; padding-left: 10px; border-left: 4px solid #FF9BB3;">基本信息</div>
+                            <div style="display: flex; flex-direction: column;">
+                                <div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #f5f5f5;">
+                                    <span style="font-size: 14px; color: #999;">性别</span>
+                                    <span style="font-size: 14px; color: #333; font-weight: 500;">女</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #f5f5f5;">
+                                    <span style="font-size: 14px; color: #999;">生日</span>
+                                    <span style="font-size: 14px; color: #333; font-weight: 500;">1995年6月15日</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #f5f5f5;">
+                                    <span style="font-size: 14px; color: #999;">城市</span>
+                                    <span style="font-size: 14px; color: #333; font-weight: 500;">上海市</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #f5f5f5;">
+                                    <span style="font-size: 14px; color: #999;">职业</span>
+                                    <span style="font-size: 14px; color: #333; font-weight: 500;">设计师</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; padding: 12px 0;">
+                                    <span style="font-size: 14px; color: #999;">兴趣爱好</span>
+                                    <span style="font-size: 14px; color: #333; font-weight: 500;">下午茶、旅行、摄影、烘焙</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="background: white; border-radius: 16px; padding: 20px; margin: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.06);">
+                            <div style="font-size: 16px; font-weight: 600; color: #333; margin-bottom: 15px; padding-left: 10px; border-left: 4px solid #FF9BB3;">个性签名</div>
+                            <div style="font-size: 14px; color: #555; line-height: 1.6; padding: 10px; background: #FFF5F7; border-radius: 10px;">
+                                生活不止眼前的苟且，还有诗和远方的下午茶 🍵✨
+                            </div>
+                        </div>
+
+                        <div style="background: white; border-radius: 16px; padding: 20px; margin: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.06);">
+                            <div style="font-size: 16px; font-weight: 600; color: #333; margin-bottom: 15px; padding-left: 10px; border-left: 4px solid #FF9BB3;">我的标签</div>
+                            <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                                <span style="background: linear-gradient(135deg, #FFF0F5 0%, #FFE4EB 100%); color: #FF6B8A; padding: 6px 14px; border-radius: 20px; font-size: 13px;">甜品控</span>
+                                <span style="background: linear-gradient(135deg, #FFF0F5 0%, #FFE4EB 100%); color: #FF6B8A; padding: 6px 14px; border-radius: 20px; font-size: 13px;">旅行达人</span>
+                                <span style="background: linear-gradient(135deg, #FFF0F5 0%, #FFE4EB 100%); color: #FF6B8A; padding: 6px 14px; border-radius: 20px; font-size: 13px;">文艺青年</span>
+                                <span style="background: linear-gradient(135deg, #FFF0F5 0%, #FFE4EB 100%); color: #FF6B8A; padding: 6px 14px; border-radius: 20px; font-size: 13px;">美食家</span>
+                                <span style="background: linear-gradient(135deg, #FFF0F5 0%, #FFE4EB 100%); color: #FF6B8A; padding: 6px 14px; border-radius: 20px; font-size: 13px;">摄影爱好者</span>
+                            </div>
+                        </div>
+
+                        <div style="background: white; border-radius: 16px; padding: 20px; margin: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.06);">
+                            <div style="font-size: 16px; font-weight: 600; color: #333; margin-bottom: 15px; padding-left: 10px; border-left: 4px solid #FF9BB3;">个人成就</div>
+                            <div style="display: flex; flex-direction: column; gap: 12px;">
+                                <div style="display: flex; align-items: center; padding: 10px; background: #FFF9F0; border-radius: 10px;">
+                                    <span style="font-size: 20px; margin-right: 12px;">🎖️</span>
+                                    <span style="font-size: 14px; color: #333;">活动达人 - 参加50+活动</span>
+                                </div>
+                                <div style="display: flex; align-items: center; padding: 10px; background: #FFF9F0; border-radius: 10px;">
+                                    <span style="font-size: 20px; margin-right: 12px;">🌟</span>
+                                    <span style="font-size: 14px; color: #333;">魅力之星 - 获得1000+点赞</span>
+                                </div>
+                                <div style="display: flex; align-items: center; padding: 10px; background: #FFF9F0; border-radius: 10px;">
+                                    <span style="font-size: 20px; margin-right: 12px;">💫</span>
+                                    <span style="font-size: 14px; color: #333;">分享达人 - 发布50+动态</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button onclick="showEditModal()" style="width: calc(100% - 30px); margin: 0 15px 30px; background: linear-gradient(135deg, #FF9BB3 0%, #FF6B8A 100%); color: white; border: none; padding: 15px; border-radius: 40px; font-size: 16px; font-weight: 600; box-shadow: 0 4px 15px rgba(255,107,138,0.3);">编辑资料</button>
+                    </div>
+                    <div class="tab-bar">
+                        <div class="tab-item" onclick="showPage('index')">
+                            <div class="tab-icon"></div>
+                            <span>发现</span>
+                        </div>
+                        <div class="tab-item" onclick="showPage('community')">
+                            <div class="tab-icon"></div>
+                            <span>社区</span>
+                        </div>
+                        <div class="tab-item" onclick="showPage('profile')">
+                            <div class="tab-icon"></div>
+                            <span>我的</span>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
+    </div>
     </div>
 
     <div class="modal-mask" id="joinModal">
@@ -1125,6 +1383,50 @@
                 <input class="modal-input" placeholder="请输入手机号" />
                 <button class="modal-btn">立即注册</button>
                 <div class="modal-close" onclick="hideModal()">取消</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-mask" id="editProfileModal">
+        <div class="modal-content" style="height: auto; max-height: 80vh; overflow-y: auto;">
+            <div class="modal-header">
+                <span>编辑资料</span>
+                <span class="modal-close-btn" onclick="hideEditModal()">×</span>
+            </div>
+            <div class="modal-body" style="padding: 20px;">
+                <div class="form-group">
+                    <label>昵称</label>
+                    <input class="modal-input" placeholder="请输入昵称" value="优雅下午茶" />
+                </div>
+                <div class="form-group">
+                    <label>个性签名</label>
+                    <textarea class="modal-textarea" placeholder="请输入个性签名">生活不止眼前的苟且，还有诗和远方的下午茶 🍵✨</textarea>
+                </div>
+                <div class="form-group">
+                    <label>性别</label>
+                    <div class="gender-options">
+                        <label class="gender-option"><input type="radio" name="gender" value="女" checked /> 女</label>
+                        <label class="gender-option"><input type="radio" name="gender" value="男" /> 男</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>生日</label>
+                    <input class="modal-input" type="date" value="1995-06-15" />
+                </div>
+                <div class="form-group">
+                    <label>城市</label>
+                    <input class="modal-input" placeholder="请输入城市" value="上海市" />
+                </div>
+                <div class="form-group">
+                    <label>职业</label>
+                    <input class="modal-input" placeholder="请输入职业" value="设计师" />
+                </div>
+                <div class="form-group">
+                    <label>兴趣爱好</label>
+                    <input class="modal-input" placeholder="请输入兴趣爱好，用逗号分隔" value="下午茶、旅行、摄影、烘焙" />
+                </div>
+                <button class="modal-btn">保存修改</button>
+                <div class="modal-close" onclick="hideEditModal()">取消</div>
             </div>
         </div>
     </div>
@@ -1159,8 +1461,20 @@
             document.getElementById('joinModal').classList.remove('active');
         }
         
+        function showEditModal() {
+            document.getElementById('editProfileModal').classList.add('active');
+        }
+        
+        function hideEditModal() {
+            document.getElementById('editProfileModal').classList.remove('active');
+        }
+        
         document.getElementById('joinModal').addEventListener('click', e => {
             if (e.target === document.getElementById('joinModal')) hideModal();
+        });
+        
+        document.getElementById('editProfileModal').addEventListener('click', e => {
+            if (e.target === document.getElementById('editProfileModal')) hideEditModal();
         });
     </script>
 </body>
