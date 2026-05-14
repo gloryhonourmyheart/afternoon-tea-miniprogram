@@ -761,6 +761,56 @@
             color: #999;
         }
 
+        /* 生活灵感卡片样式 */
+        .inspiration-card {
+            background: white;
+            border-radius: 14px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            border-left: 4px solid #FF9BB3;
+        }
+        .inspiration-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .inspiration-icon {
+            font-size: 28px;
+            margin-right: 12px;
+        }
+        .inspiration-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+        }
+        .inspiration-content {
+            margin-bottom: 15px;
+        }
+        .inspiration-item {
+            padding: 10px 12px;
+            background: #FFF5F7;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #555;
+        }
+        .inspiration-item:last-child {
+            margin-bottom: 0;
+        }
+        .inspiration-footer {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .inspiration-tag {
+            padding: 5px 12px;
+            background: linear-gradient(135deg, #FFE4EB 0%, #FFD4E0 100%);
+            border-radius: 15px;
+            font-size: 12px;
+            color: #FF6B8A;
+        }
+
         .profile-detail-header {
             background: linear-gradient(135deg, #FF9BB3 0%, #FF6B8A 100%);
             padding: 30px 20px;
@@ -1087,78 +1137,152 @@
                         <div class="tab-item" onclick="switchCommunityTab(1)">生活灵感</div>
                     </div>
                     <div class="content" id="community-content">
-                        <div class="moment-card">
-                            <div class="moment-header">
-                                <div class="avatar">L</div>
-                                <div class="user-info">
-                                    <div class="username">Lisa的下午茶</div>
-                                    <div class="time">2小时前</div>
+                        <!-- 美好瞬间 -->
+                        <div id="tab-moment" class="tab-content">
+                            <div class="moment-card">
+                                <div class="moment-header">
+                                    <div class="avatar">L</div>
+                                    <div class="user-info">
+                                        <div class="username">Lisa的下午茶</div>
+                                        <div class="time">2小时前</div>
+                                    </div>
+                                </div>
+                                <img class="moment-image" src="https://picsum.photos/id/1060/600/400" alt="活动图片">
+                                <div class="moment-content">今天的法式甜品课太治愈了！马卡龙配色美到犯规 🍰✨</div>
+                                <div class="moment-actions">
+                                    <div class="action-item">
+                                        <span class="action-icon">❤️</span>
+                                        <span class="action-text">128</span>
+                                    </div>
+                                    <div class="action-item">
+                                        <span class="action-icon">💬</span>
+                                        <span class="action-text">32</span>
+                                    </div>
+                                    <div class="action-item">
+                                        <span class="action-icon">🔗</span>
+                                        <span class="action-text">分享</span>
+                                    </div>
                                 </div>
                             </div>
-                            <img class="moment-image" src="https://picsum.photos/id/1060/600/400" alt="活动图片">
-                            <div class="moment-content">今天的法式甜品课太治愈了！马卡龙配色美到犯规 🍰✨</div>
-                            <div class="moment-actions">
-                                <div class="action-item">
-                                    <span class="action-icon">❤️</span>
-                                    <span class="action-text">128</span>
+                            <div class="moment-card">
+                                <div class="moment-header">
+                                    <div class="avatar">M</div>
+                                    <div class="user-info">
+                                        <div class="username">Mia的花艺日记</div>
+                                        <div class="time">5小时前</div>
+                                    </div>
                                 </div>
-                                <div class="action-item">
-                                    <span class="action-icon">💬</span>
-                                    <span class="action-text">32</span>
+                                <img class="moment-image" src="https://picsum.photos/id/152/600/400" alt="活动图片">
+                                <div class="moment-content">第一次尝试韩式插花，粉玫瑰和尤加利叶的搭配太温柔了 🌸</div>
+                                <div class="moment-actions">
+                                    <div class="action-item">
+                                        <span class="action-icon">❤️</span>
+                                        <span class="action-text">256</span>
+                                    </div>
+                                    <div class="action-item">
+                                        <span class="action-icon">💬</span>
+                                        <span class="action-text">45</span>
+                                    </div>
+                                    <div class="action-item">
+                                        <span class="action-icon">🔗</span>
+                                        <span class="action-text">分享</span>
+                                    </div>
                                 </div>
-                                <div class="action-item">
-                                    <span class="action-icon">🔗</span>
-                                    <span class="action-text">分享</span>
+                            </div>
+                            <div class="moment-card">
+                                <div class="moment-header">
+                                    <div class="avatar">A</div>
+                                    <div class="user-info">
+                                        <div class="username">Amy手作时光</div>
+                                        <div class="time">1天前</div>
+                                    </div>
+                                </div>
+                                <img class="moment-image" src="https://picsum.photos/id/250/600/400" alt="活动图片">
+                                <div class="moment-content">香薰蜡烛DIY成功！薰衣草味道让人瞬间放松，推荐姐妹们试试 🕯️</div>
+                                <div class="moment-actions">
+                                    <div class="action-item">
+                                        <span class="action-icon">❤️</span>
+                                        <span class="action-text">189</span>
+                                    </div>
+                                    <div class="action-item">
+                                        <span class="action-icon">💬</span>
+                                        <span class="action-text">28</span>
+                                    </div>
+                                    <div class="action-item">
+                                        <span class="action-icon">🔗</span>
+                                        <span class="action-text">分享</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="moment-card">
-                            <div class="moment-header">
-                                <div class="avatar">M</div>
-                                <div class="user-info">
-                                    <div class="username">Mia的花艺日记</div>
-                                    <div class="time">5小时前</div>
+
+                        <!-- 生活灵感 -->
+                        <div id="tab-inspiration" class="tab-content" style="display: none;">
+                            <div class="inspiration-card">
+                                <div class="inspiration-header">
+                                    <div class="inspiration-icon">🍵</div>
+                                    <div class="inspiration-title">下午茶仪式感清单</div>
+                                </div>
+                                <div class="inspiration-content">
+                                    <div class="inspiration-item">精致的骨瓷茶具</div>
+                                    <div class="inspiration-item">三层点心架</div>
+                                    <div class="inspiration-item">新鲜鲜花装饰</div>
+                                    <div class="inspiration-item">轻柔的背景音乐</div>
+                                </div>
+                                <div class="inspiration-footer">
+                                    <span class="inspiration-tag">#仪式感</span>
+                                    <span class="inspiration-tag">#下午茶</span>
                                 </div>
                             </div>
-                            <img class="moment-image" src="https://picsum.photos/id/152/600/400" alt="活动图片">
-                            <div class="moment-content">第一次尝试韩式插花，粉玫瑰和尤加利叶的搭配太温柔了 🌸</div>
-                            <div class="moment-actions">
-                                <div class="action-item">
-                                    <span class="action-icon">❤️</span>
-                                    <span class="action-text">256</span>
+
+                            <div class="inspiration-card">
+                                <div class="inspiration-header">
+                                    <div class="inspiration-icon">📚</div>
+                                    <div class="inspiration-title">适合下午茶阅读的书籍推荐</div>
                                 </div>
-                                <div class="action-item">
-                                    <span class="action-icon">💬</span>
-                                    <span class="action-text">45</span>
+                                <div class="inspiration-content">
+                                    <div class="inspiration-item">《小妇人》- 温馨治愈</div>
+                                    <div class="inspiration-item">《山茶文具店》- 温暖人心</div>
+                                    <div class="inspiration-item">《面包和汤和猫咪好天气》- 治愈系</div>
+                                    <div class="inspiration-item">《人间草木》- 汪曾祺散文</div>
                                 </div>
-                                <div class="action-item">
-                                    <span class="action-icon">🔗</span>
-                                    <span class="action-text">分享</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="moment-card">
-                            <div class="moment-header">
-                                <div class="avatar">A</div>
-                                <div class="user-info">
-                                    <div class="username">Amy手作时光</div>
-                                    <div class="time">1天前</div>
+                                <div class="inspiration-footer">
+                                    <span class="inspiration-tag">#书单</span>
+                                    <span class="inspiration-tag">#阅读</span>
                                 </div>
                             </div>
-                            <img class="moment-image" src="https://picsum.photos/id/250/600/400" alt="活动图片">
-                            <div class="moment-content">香薰蜡烛DIY成功！薰衣草味道让人瞬间放松，推荐姐妹们试试 🕯️</div>
-                            <div class="moment-actions">
-                                <div class="action-item">
-                                    <span class="action-icon">❤️</span>
-                                    <span class="action-text">189</span>
+
+                            <div class="inspiration-card">
+                                <div class="inspiration-header">
+                                    <div class="inspiration-icon">🎵</div>
+                                    <div class="inspiration-title">下午茶BGM推荐</div>
                                 </div>
-                                <div class="action-item">
-                                    <span class="action-icon">💬</span>
-                                    <span class="action-text">28</span>
+                                <div class="inspiration-content">
+                                    <div class="inspiration-item">钢琴轻音乐 - 放松心情</div>
+                                    <div class="inspiration-item">爵士咖啡馆 - 慵懒惬意</div>
+                                    <div class="inspiration-item">自然白噪音 - 治愈解压</div>
+                                    <div class="inspiration-item">古典音乐 - 优雅氛围</div>
                                 </div>
-                                <div class="action-item">
-                                    <span class="action-icon">🔗</span>
-                                    <span class="action-text">分享</span>
+                                <div class="inspiration-footer">
+                                    <span class="inspiration-tag">#音乐</span>
+                                    <span class="inspiration-tag">#BGM</span>
+                                </div>
+                            </div>
+
+                            <div class="inspiration-card">
+                                <div class="inspiration-header">
+                                    <div class="inspiration-icon">🌸</div>
+                                    <div class="inspiration-title">春日下午茶穿搭灵感</div>
+                                </div>
+                                <div class="inspiration-content">
+                                    <div class="inspiration-item">碎花连衣裙 + 草帽</div>
+                                    <div class="inspiration-item">温柔针织开衫 + 半身裙</div>
+                                    <div class="inspiration-item">复古格纹套装</div>
+                                    <div class="inspiration-item">浅色衬衫 + 牛仔裤</div>
+                                </div>
+                                <div class="inspiration-footer">
+                                    <span class="inspiration-tag">#穿搭</span>
+                                    <span class="inspiration-tag">#春日</span>
                                 </div>
                             </div>
                         </div>
@@ -1623,6 +1747,11 @@
                 } else {
                     tab.classList.remove('active');
                 }
+            });
+            // 切换内容显示
+            const contents = document.querySelectorAll('#community .tab-content');
+            contents.forEach((content, i) => {
+                content.style.display = (i === index) ? 'block' : 'none';
             });
         }
         
