@@ -161,10 +161,8 @@
         .content {
             padding: 15px;
             padding-bottom: 70px;
-            overflow-y: auto;
-            height: calc(100% - 100px);
-            -webkit-overflow-scrolling: touch;
-            scroll-behavior: smooth;
+            min-height: 100%;
+            box-sizing: border-box;
         }
         .content::-webkit-scrollbar {
             width: 0;
@@ -534,8 +532,20 @@
         }
 
         /* Page */
-        .page { display: none; }
-        .page.active { display: block; }
+        .page { 
+            display: none; 
+            height: 667px;
+            overflow: hidden;
+            position: relative;
+        }
+        .page.active { 
+            display: block;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        .page:not(.active) {
+            visibility: hidden;
+        }
 
         /* Modal */
         .modal-mask {
