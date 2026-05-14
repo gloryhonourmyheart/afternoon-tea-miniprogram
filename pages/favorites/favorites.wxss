@@ -1,0 +1,197 @@
+.favorites-page {
+  height: 100vh;
+  background: #FFF0F5;
+  display: flex;
+  flex-direction: column;
+}
+
+.status-bar {
+  height: 44px;
+  background: #FF9BB3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.nav-bar {
+  height: 44px;
+  background: #FF9BB3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 15px;
+  color: white;
+}
+
+.nav-bar-back {
+  position: relative;
+}
+
+.back-btn {
+  font-size: 24px;
+  font-weight: 300;
+}
+
+.nav-title {
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.placeholder {
+  width: 20px;
+}
+
+.content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 15px;
+  padding-bottom: 20px;
+}
+
+.section {
+  margin-bottom: 25px;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #333;
+  display: flex;
+  align-items: center;
+}
+
+.section-title::before {
+  content: '';
+  width: 4px;
+  height: 16px;
+  background: linear-gradient(180deg, #FF9BB3 0%, #FF6B8A 100%);
+  border-radius: 2px;
+  margin-right: 8px;
+}
+
+.favorites-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.favorite-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.favorite-image {
+  width: 100%;
+  height: 80px;
+  object-fit: cover;
+}
+
+.favorite-info {
+  padding: 10px;
+}
+
+.favorite-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.favorite-date {
+  font-size: 11px;
+  color: #999;
+}
+
+.activity-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.activity-card {
+  background: white;
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.activity-main {
+  display: flex;
+  align-items: center;
+}
+
+.activity-image {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  margin-right: 12px;
+}
+
+.activity-info {
+  flex: 1;
+}
+
+.activity-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.activity-datetime {
+  font-size: 12px;
+  color: #999;
+  margin-bottom: 6px;
+}
+
+.activity-status {
+  font-size: 12px;
+  color: #FF9BB3;
+}
+
+.signup-btn {
+  background: #FF9BB3;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+.users-scroll {
+  white-space: nowrap;
+}
+
+.users-list {
+  display: flex;
+  gap: 12px;
+  padding-bottom: 10px;
+}
+
+.user-item {
+  text-align: center;
+  min-width: 70px;
+}
+
+.user-avatar {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  margin-bottom: 6px;
+}
+
+.user-name {
+  font-size: 12px;
+  color: #333;
+  margin-bottom: 2px;
+}
+
+.user-role {
+  font-size: 10px;
+  color: #999;
+}

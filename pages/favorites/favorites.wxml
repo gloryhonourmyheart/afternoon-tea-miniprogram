@@ -1,0 +1,71 @@
+<view class="favorites-page">
+  <view class="status-bar">9:41</view>
+  <view class="nav-bar nav-bar-back">
+    <text class="back-btn" bindtap="goBack">‹</text>
+    <text class="nav-title">收藏与关注</text>
+    <text class="placeholder"></text>
+  </view>
+
+  <scroll-view scroll-y class="content">
+    <view class="section">
+      <view class="section-title">我的收藏</view>
+      <view class="favorites-grid">
+        <view 
+          class="favorite-card" 
+          wx:for="{{favorites}}" 
+          wx:key="id"
+          bindtap="viewActivity"
+          data-id="{{item.id}}"
+        >
+          <image class="favorite-image" src="{{item.image}}" mode="aspectFill"/>
+          <view class="favorite-info">
+            <view class="favorite-title">{{item.title}}</view>
+            <view class="favorite-date">{{item.date}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="section">
+      <view class="section-title">关注的活动</view>
+      <view class="activity-list">
+        <view 
+          class="activity-card" 
+          wx:for="{{followedActivities}}" 
+          wx:key="id"
+        >
+          <view class="activity-main">
+            <image class="activity-image" src="{{item.image}}" mode="aspectFill"/>
+            <view class="activity-info">
+              <view class="activity-title">{{item.title}}</view>
+              <view class="activity-datetime">{{item.date}} · {{item.time}}</view>
+              <view class="activity-status">❤️ 已关注</view>
+            </view>
+            <view 
+              class="signup-btn"
+              bindtap="signUp"
+              data-id="{{item.id}}"
+            >报名</view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="section">
+      <view class="section-title">关注的用户</view>
+      <scroll-view scroll-x class="users-scroll">
+        <view class="users-list">
+          <view 
+            class="user-item" 
+            wx:for="{{followedUsers}}" 
+            wx:key="id"
+          >
+            <image class="user-avatar" src="{{item.avatar}}" mode="aspectFill"/>
+            <view class="user-name">{{item.name}}</view>
+            <view class="user-role">{{item.role}}</view>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+  </scroll-view>
+</view>

@@ -14,5 +14,11 @@ Page({
     wx.navigateTo({
       url: '/pages/history/history'
     });
+  },
+
+  navigateToFavorites: function() {
+    wx.navigateTo({
+      url: '/pages/favorites/favorites'
+    });
   }
 })

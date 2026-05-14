@@ -34,7 +34,7 @@
         <text class="menu-text">参加历史</text>
         <text class="menu-arrow">›</text>
       </view>
-      <view class="menu-item" bindtap="navigateTo">
+      <view class="menu-item" bindtap="navigateToFavorites">
         <text class="menu-icon">❤️</text>
         <text class="menu-text">我的收藏</text>
         <text class="menu-arrow">›</text>
