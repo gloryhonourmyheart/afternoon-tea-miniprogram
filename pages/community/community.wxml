@@ -12,7 +12,6 @@
   </view>
 
   <scroll-view scroll-y class="content">
-    <!-- 美好瞬间 -->
     <block wx:if="{{activeTab === 0}}">
       <view class="moment-card" wx:for="{{moments}}" wx:key="id">
         <view class="moment-header">
@@ -41,20 +40,19 @@
       </view>
     </block>
 
-    <!-- 生活灵感 -->
     <block wx:if="{{activeTab === 1}}">
       <view class="inspiration-card" wx:for="{{inspirations}}" wx:key="id">
         <view class="inspiration-header">
-          <view class="inspiration-icon">{{item.icon}}</view>
+          <text class="inspiration-icon">{{item.icon}}</text>
           <text class="inspiration-title">{{item.title}}</text>
         </view>
         <view class="inspiration-content">
-          <view class="inspiration-item" wx:for="{{item.items}}" wx:key="index" wx:for-item="subItem">
-            <text>{{subItem}}</text>
+          <view class="inspiration-item" wx:for="{{item.items}}" wx:key="index" wx:for-item="item">
+            <text>{{item}}</text>
           </view>
         </view>
         <view class="inspiration-footer">
-          <text class="inspiration-tag" wx:for="{{item.tags}}" wx:key="index">{{subItem}}</text>
+          <text class="inspiration-tag" wx:for="{{item.tags}}" wx:key="index">#{{item}}</text>
         </view>
       </view>
     </block>

@@ -64,7 +64,6 @@
   padding-bottom: 70px;
 }
 
-/* 美好瞬间卡片 */
 .moment-card {
   background: white;
   border-radius: 14px;
@@ -154,7 +153,7 @@
   color: #999;
 }
 
-/* 生活灵感卡片 */
+/* 生活灵感卡片样式 */
 .inspiration-card {
   background: white;
   border-radius: 14px;
@@ -192,10 +191,6 @@
   margin-bottom: 8px;
   font-size: 14px;
   color: #555;
-}
-
-.inspiration-item:last-child {
-  margin-bottom: 0;
 }
 
 .inspiration-footer {
