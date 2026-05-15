@@ -39,6 +39,11 @@
         <text class="menu-text">我的收藏</text>
         <text class="menu-arrow">›</text>
       </view>
+      <view class="menu-item" bindtap="navigateToMembership">
+        <text class="menu-icon">💎</text>
+        <text class="menu-text">会员中心</text>
+        <text class="menu-arrow">›</text>
+      </view>
       <view class="menu-item" bindtap="navigateTo">
         <text class="menu-icon">👭</text>
         <text class="menu-text">我的好友</text>

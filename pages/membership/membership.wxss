@@ -1,0 +1,369 @@
+.membership-page {
+  height: 100vh;
+  background: #FFF0F5;
+  display: flex;
+  flex-direction: column;
+}
+
+.status-bar {
+  background: #FF9BB3;
+  padding: 12px 20px 8px;
+  text-align: center;
+  color: white;
+  font-size: 12px;
+  padding-top: 25px;
+}
+
+.nav-bar {
+  background: #FF9BB3;
+  padding: 10px 20px;
+  color: white;
+  font-weight: 600;
+  font-size: 17px;
+  text-align: center;
+}
+
+.content {
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
+  padding-bottom: 70px;
+}
+
+.vip-card {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  box-shadow: 0 10px 30px rgba(255, 107, 138, 0.3);
+}
+
+.vip-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, #FF9BB3 0%, #FF6B8A 50%, #FF8FA3 100%);
+}
+
+.vip-content {
+  position: relative;
+  z-index: 1;
+  padding: 25px;
+  color: white;
+}
+
+.vip-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.vip-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.vip-icon {
+  font-size: 36px;
+}
+
+.vip-level {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.vip-expire {
+  font-size: 12px;
+  opacity: 0.9;
+}
+
+.vip-info {
+  margin-bottom: 20px;
+}
+
+.points-section {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.points-value {
+  font-size: 36px;
+  font-weight: 700;
+}
+
+.points-label {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.progress-section {
+  margin-top: 15px;
+}
+
+.progress-bar {
+  height: 8px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: white;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  font-size: 12px;
+  opacity: 0.9;
+  margin-top: 8px;
+  display: block;
+}
+
+.vip-btn {
+  width: 100%;
+  background: white;
+  color: #FF6B8A;
+  border: none;
+  border-radius: 30px;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.section-icon {
+  font-size: 20px;
+}
+
+.benefits-section {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+}
+
+.benefits-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.benefit-item {
+  width: calc(50% - 7.5px);
+  background: #FFF5F7;
+  border-radius: 12px;
+  padding: 15px;
+  text-align: center;
+}
+
+.benefit-icon {
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.benefit-name {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.benefit-desc {
+  font-size: 12px;
+  color: #999;
+}
+
+.level-section {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+}
+
+.level-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.level-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.level-item:last-child {
+  border-bottom: none;
+}
+
+.level-item.active {
+  background: #FFF5F7;
+  margin: 0 -20px;
+  padding: 12px 20px;
+  border-radius: 16px;
+}
+
+.level-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 12px;
+}
+
+.level-dot.normal {
+  background: #DDDDDD;
+}
+
+.level-dot.silver {
+  background: #C0C0C0;
+}
+
+.level-dot.gold {
+  background: linear-gradient(135deg, #FFD700, #FFA500);
+}
+
+.level-dot.diamond {
+  background: linear-gradient(135deg, #B9F2FF, #87CEEB);
+}
+
+.level-info {
+  flex: 1;
+}
+
+.level-name {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 2px;
+}
+
+.level-benefit {
+  font-size: 12px;
+  color: #999;
+}
+
+.level-status {
+  font-size: 12px;
+  color: #FF6B8A;
+  font-weight: 600;
+}
+
+.level-status.current {
+  background: linear-gradient(135deg, #FF9BB3, #FF6B8A);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 12px;
+}
+
+.level-status.locked {
+  color: #999;
+}
+
+.history-section {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+}
+
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.history-item {
+  display: flex;
+  align-items: center;
+}
+
+.history-icon {
+  font-size: 24px;
+  margin-right: 12px;
+}
+
+.history-info {
+  flex: 1;
+}
+
+.history-title {
+  display: block;
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 2px;
+}
+
+.history-time {
+  font-size: 12px;
+  color: #999;
+}
+
+.history-points {
+  font-size: 14px;
+  font-weight: 600;
+  color: #FF6B8A;
+}
+
+.tab-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  display: flex;
+  justify-content: space-around;
+  padding: 8px 0 16px;
+  border-top: 1px solid #f0f0f0;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+}
+
+.tab-bar .tab-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #999;
+  font-size: 11px;
+  padding: 4px 20px;
+}
+
+.tab-bar .tab-item.active {
+  color: #FF9BB3;
+}
+
+.tab-bar .tab-icon {
+  width: 24px;
+  height: 24px;
+  background: #DDDDDD;
+  border-radius: 6px;
+  margin-bottom: 4px;
+  transition: all 0.2s ease;
+}
+
+.tab-bar .tab-item.active .tab-icon {
+  background: #FF9BB3;
+  transform: scale(1.1);
+}

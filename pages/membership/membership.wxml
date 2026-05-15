@@ -1,0 +1,170 @@
+<view class="membership-page">
+  <view class="status-bar">9:41</view>
+  <view class="nav-bar">会员中心</view>
+  
+  <scroll-view scroll-y class="content">
+    <view class="vip-card">
+      <view class="vip-bg"></view>
+      <view class="vip-content">
+        <view class="vip-header">
+          <view class="vip-badge">
+            <text class="vip-icon">👑</text>
+            <text class="vip-level">铂金会员</text>
+          </view>
+          <view class="vip-expire">有效期至 2026.12.31</view>
+        </view>
+        
+        <view class="vip-info">
+          <view class="points-section">
+            <text class="points-value">1,280</text>
+            <text class="points-label">当前积分</text>
+          </view>
+          <view class="progress-section">
+            <view class="progress-bar">
+              <view class="progress-fill" style="width: 65%"></view>
+            </view>
+            <text class="progress-text">距离钻石会员还需 720 积分</text>
+          </view>
+        </view>
+
+        <button class="vip-btn">升级钻石会员</button>
+      </view>
+    </view>
+
+    <view class="benefits-section">
+      <view class="section-title">
+        <text class="section-icon">🎁</text>
+        <text>专属权益</text>
+      </view>
+      <view class="benefits-grid">
+        <view class="benefit-item">
+          <view class="benefit-icon">🎟️</view>
+          <text class="benefit-name">免费报名</text>
+          <text class="benefit-desc">每月3次免费活动</text>
+        </view>
+        <view class="benefit-item">
+          <view class="benefit-icon">💝</view>
+          <text class="benefit-name">专属折扣</text>
+          <text class="benefit-desc">全场8折优惠</text>
+        </view>
+        <view class="benefit-item">
+          <view class="benefit-icon">🎁</view>
+          <text class="benefit-name">生日礼包</text>
+          <text class="benefit-desc">生日月专属礼物</text>
+        </view>
+        <view class="benefit-item">
+          <view class="benefit-icon">🚀</view>
+          <text class="benefit-name">优先预约</text>
+          <text class="benefit-desc">活动优先报名权</text>
+        </view>
+        <view class="benefit-item">
+          <view class="benefit-icon">🎵</view>
+          <text class="benefit-name">专属客服</text>
+          <text class="benefit-desc">一对一服务</text>
+        </view>
+        <view class="benefit-item">
+          <view class="benefit-icon">📊</view>
+          <text class="benefit-name">积分加倍</text>
+          <text class="benefit-desc">消费积分2倍</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="level-section">
+      <view class="section-title">
+        <text class="section-icon">⭐</text>
+        <text>会员等级</text>
+      </view>
+      <view class="level-list">
+        <view class="level-item">
+          <view class="level-dot normal"></view>
+          <view class="level-info">
+            <text class="level-name">普通会员</text>
+            <text class="level-benefit">基础权益</text>
+          </view>
+          <view class="level-status">已达成</view>
+        </view>
+        <view class="level-item">
+          <view class="level-dot silver"></view>
+          <view class="level-info">
+            <text class="level-name">白银会员</text>
+            <text class="level-benefit">500积分解锁</text>
+          </view>
+          <view class="level-status">已达成</view>
+        </view>
+        <view class="level-item active">
+          <view class="level-dot gold"></view>
+          <view class="level-info">
+            <text class="level-name">铂金会员</text>
+            <text class="level-benefit">1000积分解锁</text>
+          </view>
+          <view class="level-status current">当前</view>
+        </view>
+        <view class="level-item locked">
+          <view class="level-dot diamond"></view>
+          <view class="level-info">
+            <text class="level-name">钻石会员</text>
+            <text class="level-benefit">2000积分解锁</text>
+          </view>
+          <view class="level-status locked">🔒</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="history-section">
+      <view class="section-title">
+        <text class="section-icon">📝</text>
+        <text>积分记录</text>
+      </view>
+      <view class="history-list">
+        <view class="history-item">
+          <view class="history-icon">➕</view>
+          <view class="history-info">
+            <text class="history-title">参加活动获得</text>
+            <text class="history-time">2024-01-15</text>
+          </view>
+          <view class="history-points">+100</view>
+        </view>
+        <view class="history-item">
+          <view class="history-icon">➕</view>
+          <view class="history-info">
+            <text class="history-title">每日签到</text>
+            <text class="history-time">2024-01-14</text>
+          </view>
+          <view class="history-points">+10</view>
+        </view>
+        <view class="history-item">
+          <view class="history-icon">➖</view>
+          <view class="history-info">
+            <text class="history-title">积分兑换礼品</text>
+            <text class="history-time">2024-01-10</text>
+          </view>
+          <view class="history-points">-200</view>
+        </view>
+        <view class="history-item">
+          <view class="history-icon">➕</view>
+          <view class="history-info">
+            <text class="history-title">邀请好友奖励</text>
+            <text class="history-time">2024-01-08</text>
+          </view>
+          <view class="history-points">+50</view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+
+  <view class="tab-bar">
+    <view class="tab-item" bindtap="navigateTo" data-url="/pages/index/index">
+      <view class="tab-icon"></view>
+      <text>发现</text>
+    </view>
+    <view class="tab-item" bindtap="navigateTo" data-url="/pages/community/community">
+      <view class="tab-icon"></view>
+      <text>社区</text>
+    </view>
+    <view class="tab-item active" bindtap="navigateTo" data-url="/pages/profile/profile">
+      <view class="tab-icon"></view>
+      <text>我的</text>
+    </view>
+  </view>
+</view>

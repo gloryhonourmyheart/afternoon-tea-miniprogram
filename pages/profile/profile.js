@@ -20,5 +20,11 @@ Page({
     wx.navigateTo({
       url: '/pages/favorites/favorites'
     });
+  },
+
+  navigateToMembership: function() {
+    wx.navigateTo({
+      url: '/pages/membership/membership'
+    });
   }
 })
