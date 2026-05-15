@@ -1,0 +1,58 @@
+<view class="container">
+  <view class="page-header">
+    <view class="header-tabs">
+      <view class="tab-item {{activeTab === 'activities' ? 'active' : ''}}" bindtap="switchTab('activities')">
+        <text class="tab-text">关注的活动</text>
+      </view>
+      <view class="tab-item {{activeTab === 'users' ? 'active' : ''}}" bindtap="switchTab('users')">
+        <text class="tab-text">关注的用户</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="content">
+    <view wx:if="{{activeTab === 'activities'}}">
+      <view wx:if="{{followingActivities.length > 0}}" class="activity-list">
+        <view wx:for="{{followingActivities}}" wx:key="id" class="activity-card" bindtap="goToDetail">
+          <image class="activity-image" src="{{item.image}}" mode="aspectFill"></image>
+          <view class="activity-info">
+            <text class="activity-title">{{item.title}}</text>
+            <view class="activity-meta">
+              <text class="activity-date">{{item.date}}</text>
+              <text class="activity-location">{{item.location}}</text>
+            </view>
+            <view class="activity-footer">
+              <text class="activity-price">¥{{item.price}}</text>
+              <button class="activity-btn">报名</button>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view wx:else class="empty-state">
+        <text class="empty-icon">👀</text>
+        <text class="empty-text">还没有关注任何活动</text>
+        <text class="empty-hint">去发现页看看有什么精彩活动吧</text>
+      </view>
+    </view>
+
+    <view wx:if="{{activeTab === 'users'}}">
+      <view wx:if="{{followingUsers.length > 0}}" class="user-list">
+        <view wx:for="{{followingUsers}}" wx:key="id" class="user-item" bindtap="goToUser">
+          <view class="user-avatar">
+            <text class="avatar-text">{{item.avatar}}</text>
+          </view>
+          <view class="user-info">
+            <text class="user-name">{{item.name}}</text>
+            <text class="user-desc">{{item.desc}}</text>
+          </view>
+          <button class="unfollow-btn" bindtap="handleUnfollow">取消关注</button>
+        </view>
+      </view>
+      <view wx:else class="empty-state">
+        <text class="empty-icon">🙋</text>
+        <text class="empty-text">还没有关注任何用户</text>
+        <text class="empty-hint">去社区看看有趣的小伙伴吧</text>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1198,6 +1198,7 @@
         <button onclick="showPage('profile')">个人中心</button>
         <button onclick="showPage('membership')">会员中心</button>
         <button onclick="showPage('profile-detail')">个人档案</button>
+        <button onclick="showPage('following')">我的关注</button>
     </div>
     
     <div class="phone-container">
@@ -1559,7 +1560,7 @@
                                 <span class="menu-text">我的收藏</span>
                                 <div class="menu-arrow"></div>
                             </div>
-                            <div class="menu-item" onclick="showPage('favorites')">
+                            <div class="menu-item" onclick="showPage('following')">
                                 <div class="menu-icon"></div>
                                 <span class="menu-text">我的关注</span>
                                 <div class="menu-arrow"></div>
@@ -1938,6 +1939,106 @@
                     </div>
                 </div>
 
+                <!-- 我的关注页面 -->
+                <div class="page" id="following">
+                    <div class="status-bar">9:41</div>
+                    <div class="nav-bar nav-bar-back">
+                        <span onclick="showPage('profile')">‹</span>
+                        <span>我的关注</span>
+                        <span style="width:20px;"></span>
+                    </div>
+                    <div class="content" style="padding:0;">
+                        <div class="header-tabs" style="display: flex; background: white; padding: 15px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+                            <div class="tab-item active" onclick="switchFollowingTab('activities')" style="flex: 1; text-align: center; padding: 10px 0; border-radius: 20px; background: linear-gradient(135deg, #FF9BB3, #FF6B8A);">
+                                <span style="color: white; font-size: 14px; font-weight: 500;">关注的活动</span>
+                            </div>
+                            <div class="tab-item" onclick="switchFollowingTab('users')" style="flex: 1; text-align: center; padding: 10px 0; border-radius: 20px;">
+                                <span style="color: #666; font-size: 14px; font-weight: 500;">关注的用户</span>
+                            </div>
+                        </div>
+                        <div id="following-activities" style="padding: 15px;">
+                            <div style="display: flex; flex-direction: column; gap: 15px;">
+                                <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.06);">
+                                    <img src="https://picsum.photos/id/1080/400/300" style="width: 100%; height: 180px; object-fit: cover;" />
+                                    <div style="padding: 15px;">
+                                        <div style="font-size: 16px; font-weight: 600; color: #333; margin-bottom: 10px;">红酒品鉴会</div>
+                                        <div style="display: flex; gap: 15px; margin-bottom: 12px;">
+                                            <span style="font-size: 13px; color: #999;">6月10日 14:00</span>
+                                            <span style="font-size: 13px; color: #999;">市中心红酒庄</span>
+                                        </div>
+                                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                                            <span style="font-size: 18px; font-weight: 600; color: #FF6B8A;">¥298</span>
+                                            <button style="background: linear-gradient(135deg, #FF9BB3, #FF6B8A); color: white; border: none; border-radius: 20px; padding: 8px 20px; font-size: 13px; font-weight: 500;">报名</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.06);">
+                                    <img src="https://picsum.photos/id/118/400/300" style="width: 100%; height: 180px; object-fit: cover;" />
+                                    <div style="padding: 15px;">
+                                        <div style="font-size: 16px; font-weight: 600; color: #333; margin-bottom: 10px;">花艺设计工作坊</div>
+                                        <div style="display: flex; gap: 15px; margin-bottom: 12px;">
+                                            <span style="font-size: 13px; color: #999;">6月15日 10:00</span>
+                                            <span style="font-size: 13px; color: #999;">花园咖啡馆</span>
+                                        </div>
+                                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                                            <span style="font-size: 18px; font-weight: 600; color: #FF6B8A;">¥168</span>
+                                            <button style="background: linear-gradient(135deg, #FF9BB3, #FF6B8A); color: white; border: none; border-radius: 20px; padding: 8px 20px; font-size: 13px; font-weight: 500;">报名</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.06);">
+                                    <img src="https://picsum.photos/id/431/400/300" style="width: 100%; height: 180px; object-fit: cover;" />
+                                    <div style="padding: 15px;">
+                                        <div style="font-size: 16px; font-weight: 600; color: #333; margin-bottom: 10px;">英式下午茶礼仪课</div>
+                                        <div style="display: flex; gap: 15px; margin-bottom: 12px;">
+                                            <span style="font-size: 13px; color: #999;">6月20日 14:30</span>
+                                            <span style="font-size: 13px; color: #999;">优雅茶室</span>
+                                        </div>
+                                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                                            <span style="font-size: 18px; font-weight: 600; color: #FF6B8A;">¥198</span>
+                                            <button style="background: linear-gradient(135deg, #FF9BB3, #FF6B8A); color: white; border: none; border-radius: 20px; padding: 8px 20px; font-size: 13px; font-weight: 500;">报名</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="following-users" style="display: none; padding: 15px;">
+                            <div style="display: flex; flex-direction: column; gap: 12px;">
+                                <div style="display: flex; align-items: center; background: white; padding: 15px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.06);">
+                                    <div style="width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, #FF9BB3, #FF6B8A); display: flex; align-items: center; justify-content: center; margin-right: 15px;">
+                                        <span style="font-size: 20px; font-weight: 600; color: white;">M</span>
+                                    </div>
+                                    <div style="flex: 1;">
+                                        <div style="font-size: 15px; font-weight: 600; color: #333; margin-bottom: 4px;">抹茶控小美</div>
+                                        <div style="font-size: 12px; color: #999;">热爱抹茶和一切美好事物</div>
+                                    </div>
+                                    <button style="background: #F5F5F5; color: #666; border: none; border-radius: 20px; padding: 8px 16px; font-size: 12px;">取消关注</button>
+                                </div>
+                                <div style="display: flex; align-items: center; background: white; padding: 15px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.06);">
+                                    <div style="width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, #FF9BB3, #FF6B8A); display: flex; align-items: center; justify-content: center; margin-right: 15px;">
+                                        <span style="font-size: 20px; font-weight: 600; color: white;">L</span>
+                                    </div>
+                                    <div style="flex: 1;">
+                                        <div style="font-size: 15px; font-weight: 600; color: #333; margin-bottom: 4px;">Lisa的下午茶</div>
+                                        <div style="font-size: 12px; color: #999;">分享精致生活方式</div>
+                                    </div>
+                                    <button style="background: #F5F5F5; color: #666; border: none; border-radius: 20px; padding: 8px 16px; font-size: 12px;">取消关注</button>
+                                </div>
+                                <div style="display: flex; align-items: center; background: white; padding: 15px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.06);">
+                                    <div style="width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, #FF9BB3, #FF6B8A); display: flex; align-items: center; justify-content: center; margin-right: 15px;">
+                                        <span style="font-size: 20px; font-weight: 600; color: white;">S</span>
+                                    </div>
+                                    <div style="flex: 1;">
+                                        <div style="font-size: 15px; font-weight: 600; color: #333; margin-bottom: 4px;">甜品师小雪</div>
+                                        <div style="font-size: 12px; color: #999;">法式甜品制作达人</div>
+                                    </div>
+                                    <button style="background: #F5F5F5; color: #666; border: none; border-radius: 20px; padding: 8px 16px; font-size: 12px;">取消关注</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- 收藏与关注页面 -->
                 <div class="page" id="favorites">
                     <div class="status-bar">9:41</div>
@@ -2146,6 +2247,21 @@
             contents.forEach((content, i) => {
                 content.style.display = (i === index) ? 'block' : 'none';
             });
+        }
+        
+        function switchFollowingTab(tab) {
+            const tabs = document.querySelectorAll('#following .tab-item');
+            tabs.forEach((t) => {
+                if (t.textContent.includes(tab === 'activities' ? '活动' : '用户')) {
+                    t.style.background = 'linear-gradient(135deg, #FF9BB3, #FF6B8A)';
+                    t.querySelector('span').style.color = 'white';
+                } else {
+                    t.style.background = 'transparent';
+                    t.querySelector('span').style.color = '#666';
+                }
+            });
+            document.getElementById('following-activities').style.display = tab === 'activities' ? 'block' : 'none';
+            document.getElementById('following-users').style.display = tab === 'users' ? 'block' : 'none';
         }
         
         function showModal() {
