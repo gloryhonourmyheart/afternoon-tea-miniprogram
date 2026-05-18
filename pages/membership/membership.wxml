@@ -8,26 +8,49 @@
       <view class="vip-content">
         <view class="vip-header">
           <view class="vip-badge">
-            <text class="vip-icon">👑</text>
-            <text class="vip-level">铂金会员</text>
+            <text class="vip-icon">{{vipInfo.icon}}</text>
+            <text class="vip-level">{{vipInfo.levelName}}</text>
           </view>
-          <view class="vip-expire">有效期至 2026.12.31</view>
+          <view class="vip-expire">有效期至 {{vipInfo.expireDate}}</view>
         </view>
         
         <view class="vip-info">
           <view class="points-section">
-            <text class="points-value">1,280</text>
+            <text class="points-value">{{vipInfo.points}}</text>
             <text class="points-label">当前积分</text>
           </view>
           <view class="progress-section">
             <view class="progress-bar">
-              <view class="progress-fill" style="width: 65%"></view>
+              <view class="progress-fill" style="width: {{progress}}%"></view>
             </view>
-            <text class="progress-text">距离钻石会员还需 720 积分</text>
+            <text class="progress-text">距离{{nextLevelName}}还需 {{neededPoints}} 积分</text>
           </view>
         </view>
 
-        <button class="vip-btn">升级钻石会员</button>
+        <button class="vip-btn" bindtap="upgradeVIP">{{upgradeBtnText}}</button>
+      </view>
+    </view>
+
+    <view class="quick-actions">
+      <view class="action-item" bindtap="handleCheckIn">
+        <view class="action-icon {{checkedIn ? 'checked' : ''}}">📅</view>
+        <text class="action-name">{{checkedIn ? '已签到' : '每日签到'}}</text>
+        <text class="action-desc">{{checkedIn ? '明天再来' : '+10积分'}}</text>
+      </view>
+      <view class="action-item" bindtap="goToMall">
+        <view class="action-icon">🎁</view>
+        <text class="action-name">积分商城</text>
+        <text class="action-desc">兑换好礼</text>
+      </view>
+      <view class="action-item" bindtap="inviteFriends">
+        <view class="action-icon">👥</view>
+        <text class="action-name">邀请好友</text>
+        <text class="action-desc">+50积分</text>
+      </view>
+      <view class="action-item" bindtap="viewBenefits">
+        <view class="action-icon">📋</view>
+        <text class="action-name">权益说明</text>
+        <text class="action-desc">查看详情</text>
       </view>
     </view>
 
@@ -35,37 +58,13 @@
       <view class="section-title">
         <text class="section-icon">🎁</text>
         <text>专属权益</text>
+        <text class="section-more" bindtap="viewBenefits">查看全部 ›</text>
       </view>
       <view class="benefits-grid">
-        <view class="benefit-item">
-          <view class="benefit-icon">🎟️</view>
-          <text class="benefit-name">免费报名</text>
-          <text class="benefit-desc">每月3次免费活动</text>
-        </view>
-        <view class="benefit-item">
-          <view class="benefit-icon">💝</view>
-          <text class="benefit-name">专属折扣</text>
-          <text class="benefit-desc">全场8折优惠</text>
-        </view>
-        <view class="benefit-item">
-          <view class="benefit-icon">🎁</view>
-          <text class="benefit-name">生日礼包</text>
-          <text class="benefit-desc">生日月专属礼物</text>
-        </view>
-        <view class="benefit-item">
-          <view class="benefit-icon">🚀</view>
-          <text class="benefit-name">优先预约</text>
-          <text class="benefit-desc">活动优先报名权</text>
-        </view>
-        <view class="benefit-item">
-          <view class="benefit-icon">🎵</view>
-          <text class="benefit-name">专属客服</text>
-          <text class="benefit-desc">一对一服务</text>
-        </view>
-        <view class="benefit-item">
-          <view class="benefit-icon">📊</view>
-          <text class="benefit-name">积分加倍</text>
-          <text class="benefit-desc">消费积分2倍</text>
+        <view class="benefit-item" wx:for="{{benefits}}" wx:key="name" bindtap="showBenefitDetail" data-index="{{index}}">
+          <view class="benefit-icon">{{item.icon}}</view>
+          <text class="benefit-name">{{item.name}}</text>
+          <text class="benefit-desc">{{item.desc}}</text>
         </view>
       </view>
     </view>
@@ -76,37 +75,17 @@
         <text>会员等级</text>
       </view>
       <view class="level-list">
-        <view class="level-item">
-          <view class="level-dot normal"></view>
+        <view class="level-item {{item.status}}" wx:for="{{levels}}" wx:key="name">
+          <view class="level-dot {{item.status}}"></view>
           <view class="level-info">
-            <text class="level-name">普通会员</text>
-            <text class="level-benefit">基础权益</text>
+            <text class="level-name">{{item.name}}</text>
+            <text class="level-benefit">{{item.benefit}}</text>
           </view>
-          <view class="level-status">已达成</view>
-        </view>
-        <view class="level-item">
-          <view class="level-dot silver"></view>
-          <view class="level-info">
-            <text class="level-name">白银会员</text>
-            <text class="level-benefit">500积分解锁</text>
+          <view class="level-status {{item.status}}">
+            <text wx:if="{{item.status === 'completed'}}">✓ 已达成</text>
+            <text wx:elif="{{item.status === 'current'}}">当前</text>
+            <text wx:else>🔒</text>
           </view>
-          <view class="level-status">已达成</view>
-        </view>
-        <view class="level-item active">
-          <view class="level-dot gold"></view>
-          <view class="level-info">
-            <text class="level-name">铂金会员</text>
-            <text class="level-benefit">1000积分解锁</text>
-          </view>
-          <view class="level-status current">当前</view>
-        </view>
-        <view class="level-item locked">
-          <view class="level-dot diamond"></view>
-          <view class="level-info">
-            <text class="level-name">钻石会员</text>
-            <text class="level-benefit">2000积分解锁</text>
-          </view>
-          <view class="level-status locked">🔒</view>
         </view>
       </view>
     </view>
@@ -115,40 +94,28 @@
       <view class="section-title">
         <text class="section-icon">📝</text>
         <text>积分记录</text>
+        <text class="section-more" bindtap="viewAllHistory">查看全部 ›</text>
       </view>
       <view class="history-list">
-        <view class="history-item">
-          <view class="history-icon">➕</view>
+        <view class="history-item" wx:for="{{history}}" wx:key="time">
+          <view class="history-icon {{item.type}}">{{item.type === 'add' ? '➕' : '➖'}}</view>
           <view class="history-info">
-            <text class="history-title">参加活动获得</text>
-            <text class="history-time">2024-01-15</text>
+            <text class="history-title">{{item.title}}</text>
+            <text class="history-time">{{item.time}}</text>
           </view>
-          <view class="history-points">+100</view>
+          <view class="history-points {{item.type}}">{{item.points > 0 ? '+' : ''}}{{item.points}}</view>
         </view>
-        <view class="history-item">
-          <view class="history-icon">➕</view>
-          <view class="history-info">
-            <text class="history-title">每日签到</text>
-            <text class="history-time">2024-01-14</text>
-          </view>
-          <view class="history-points">+10</view>
+      </view>
+    </view>
+
+    <view class="invite-section">
+      <view class="invite-card">
+        <view class="invite-content">
+          <view class="invite-title">邀请好友得积分</view>
+          <view class="invite-desc">每邀请一位好友注册，双方各得50积分</view>
+          <button class="invite-btn" bindtap="inviteFriends">立即邀请</button>
         </view>
-        <view class="history-item">
-          <view class="history-icon">➖</view>
-          <view class="history-info">
-            <text class="history-title">积分兑换礼品</text>
-            <text class="history-time">2024-01-10</text>
-          </view>
-          <view class="history-points">-200</view>
-        </view>
-        <view class="history-item">
-          <view class="history-icon">➕</view>
-          <view class="history-info">
-            <text class="history-title">邀请好友奖励</text>
-            <text class="history-time">2024-01-08</text>
-          </view>
-          <view class="history-points">+50</view>
-        </view>
+        <view class="invite-icon">🎁</view>
       </view>
     </view>
   </scroll-view>
@@ -165,6 +132,22 @@
     <view class="tab-item active" bindtap="navigateTo" data-url="/pages/profile/profile">
       <view class="tab-icon"></view>
       <text>我的</text>
+    </view>
+  </view>
+
+  <view class="modal {{showModal ? 'active' : ''}}" bindtap="hideModal">
+    <view class="modal-content" catchtap="preventHide">
+      <view class="modal-header">
+        <text class="modal-title">{{modalTitle}}</text>
+        <text class="modal-close" bindtap="hideModal">×</text>
+      </view>
+      <view class="modal-body">
+        <text>{{modalContent}}</text>
+      </view>
+      <view class="modal-footer">
+        <button class="modal-btn cancel" bindtap="hideModal">取消</button>
+        <button class="modal-btn confirm" bindtap="confirmModal">确定</button>
+      </view>
     </view>
   </view>
 </view>
